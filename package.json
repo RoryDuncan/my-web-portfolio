@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-2017",
+  "version": "1.0.0",
+  "description": "My personal portfolio in 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoryDuncan/Portfolio-2017.git"
+  },
+  "author": "Rory Duncan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RoryDuncan/Portfolio-2017/issues"
+  },
+  "homepage": "https://github.com/RoryDuncan/Portfolio-2017#readme",
+  "devDependencies": {
+    "rollup": "^0.49.2"
+  }
+}
