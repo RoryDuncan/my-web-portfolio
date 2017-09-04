@@ -6,21 +6,32 @@ head
   meta(http-equiv="X-UA-Compatible", content="ie=edge")
   block title
     title Introduction ▫ Rory A. Duncan
+  link(href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans", rel="stylesheet")
+  link(rel="stylesheet", href="css/main.css")
 body
+  nav
+    ul.navigation
+      li
+        a(href="index.html", class=(page == "index" ? "active" : "")) Introduction
+          .vector
+      li
+        a(href="about.html", class=(page == "about" ? "active" : "")) About
+          .vector
+      li 
+        a(href="work.html", class=(page == "work" ? "active" : "")) Work
+          .vector
+      li 
+        a(href="contact.html", class=(page == "contact" ? "active" : "")) Connect
+          .vector
   .container
-    h1.logo.name Rory Duncan
+    header
+      h2.brand-title Rory Duncan
+      p.professional-titles.description
+        span.symbol="⌌ "
+        | Web Developer, Software Engineer
+        span.symbol=" ⌏"
     content
       block content
-    nav
-      ul.navigation
-        li
-          a(href="/") Introduction
-        li
-          a(href="/about") About
-        li 
-          a(href="/work") Work
-        li 
-          a(href="/contact") Contact
           
   script(src="js/bundle.js")
   

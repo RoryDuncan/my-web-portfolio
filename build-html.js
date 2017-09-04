@@ -15,7 +15,7 @@ const renderPugIntoHTML = (filename, i, arr) => {
   
   let input = `src/views/pages/${filename}.pug`;
   let output = `public/${filename}.html`;
-  let html = pug.renderFile(input, {pretty: true,});
+  let html = pug.renderFile(input, {pretty: true, page: filename});
   let tally = `(${i + 1} of ${arr.length + 1})`;
   
   fs.writeFile(output, html, "utf8", function (err) {
