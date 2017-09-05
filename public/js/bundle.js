@@ -1,9 +1,9 @@
 (function () {
 'use strict';
 
-var about = "\n<div class=\"about\">\n  <h1>About Me </h1>\n  <p>I spend portion of my time working on side projects, or helping others with theirs.</p>\n</div>";
+var about = "\n<div class=\"about\">\n  <h1>About Me </h1>\n  <p>I live in Chico, CA where I spend a greater portion of my time working on side projects, or helping friends and colleagues with theirs.</p>\n</div>";
 
-var introduction = "\n<div class=\"introduction\">\n  <h1>Introduction</h1>\n  <div class=\"skills\">\n    <p id=\"hard-skills\">I have a focused interest in design, user interaction, user experience, developer training and education, process development, content writing, and code architecture.</p>\n    <p>I intently work by the aphorism <strong>Strong Opinions, Weakly Held</strong>.</p>\n  </div>\n</div>";
+var introduction = "\n<div class=\"introduction\">\n  <h1>Introduction</h1>\n  <div class=\"skills\">\n    <p id=\"hard-skills\">I have a focused interest in design, user interaction, user experience, developer training and education, process development, authoring content, and code architecture.</p>\n    <p>I intently work by the aphorism <strong>Strong Opinions, Weakly Held</strong>.</p>\n  </div>\n</div>";
 
 var work = "\n<div class=\"work\">\n  <h1>Work and Experience</h1>\n  <p>blah blah blah</p>\n</div>";
 
