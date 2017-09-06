@@ -10,16 +10,17 @@ body {
   --container-background-color: #161616;
   --body-color: #a5a7aa;
   --highlight-color: #F6BD95;
+  --link-color: #6aa;
   
   font-family: 'Work Sans', sans-serif;
   width: 100vw;
   height: 100vh;
   padding: 0 0;
   margin: 0 0;
-  overflow: hidden;
+  /*overflow: hidden;*/
   display: grid;
-  grid-template-columns: [left-gutter] auto [content] 40rem [right-gutter] auto;
-  grid-template-rows: [top-gutter] auto [content] 40rem [bottom-gutter] auto;
+  grid-template-columns: [left-gutter] auto [content] 50rem [right-gutter] auto;
+  grid-template-rows: [top-gutter] auto [content] 50rem [bottom-gutter] auto;
 /*   background-color: var(--body-background-color); */
   color: var(--body-color);
   background: var(--body-background-color);
@@ -30,7 +31,7 @@ body {
   grid-column-start: content;
   grid-row-start: content;
   grid-template-columns: 20rem 20rem;
-  grid-template-rows: 20rem 20rem;
+  grid-template-rows: 20rem 20rem 10rem;
   box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2); 
   z-index: 10;
   justify-content: space-evenly;
@@ -41,7 +42,7 @@ body {
 a,
 a:link,
 a:visited {
-  color: #6aa;
+  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -233,6 +234,66 @@ nav ul li .active:before {
   animation: 0.5s linear blink infinite alternate-reverse;
 }
 
+.work {
+  /*background-color: var(--body-background-color);*/
+  /*background-color: #fff;*/
+  margin: 0rem 0rem;
+  /*padding: 2rem 10rem;*/
+  border: 1px solid var(--container-background-color);
+  /*overflow-y: scroll;*/
+  /*max-height: 20rem;*/
+}
+
+
+.work-history {
+  list-style: none;
+  padding: 1rem 0;
+  font-size: 0.8rem;
+}
+
+.work-history .item {
+  margin-bottom: 1rem;
+}
+
+.work-history .positions {
+  padding: 0 0;
+  clear: both;
+  list-style: none;
+}
+
+.work-history .positions .position {
+  display: inline;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--link-color);
+}
+
+.work-history .positions .position:after {
+  content: ", ";
+}
+
+.work-history .positions .position:last-child:after {
+  content: none;
+}
+
+
+.work-history .business-name,
+.work-history .location {
+  display: inline;
+}
+
+.work-history .location {
+  opacity: 0.65;
+}
+
+.work-history .location:before {
+  content: "⸺";
+  margin: 0 0.5em;
+  opacity: 0.4;
+}
+
+
+
 @keyframes blink {
   from {
     opacity: 0;
@@ -241,5 +302,5 @@ nav ul li .active:before {
   to {
     opacity: 1;
   }
-  
 }
+
