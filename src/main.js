@@ -1,10 +1,10 @@
 
 import pages from "./pages";
-
-console.log("hey", pages);
+import "./canvas-background.js";
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
+
 
 [].forEach.call( anchors, (el) => {
   el.addEventListener("click", (e) => {
@@ -30,8 +30,6 @@ const changePageContentTo = (pageHref) => {
     console.log("Invalid page:", pageName)
     return;
   }
-  
-  content.classList.add("animation--change-page")
   
   
   if (pageName === "" || pageName === "index") pageName = "introduction";

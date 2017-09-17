@@ -18,11 +18,9 @@ body {
   height: 100vh;
   padding: 0 0;
   margin: 0 0;
-  /*overflow: hidden;*/
   display: grid;
   grid-template-columns: [left-gutter] auto [content] 50rem [right-gutter] auto;
   grid-template-rows: [top-gutter] auto [content] 50rem [bottom-gutter] auto;
-/*   background-color: var(--body-background-color); */
   color: var(--body-color);
   background: var(--body-background-color);
 }
@@ -46,14 +44,24 @@ a:link {
   text-decoration: none;
 }
 
-a:hover,
-a:link:hover {
-  
+content a:hover {
+  text-decoration: underline;
 }
 
 ::selection {
   color: var(--highlight-color);
   background: transparent;
+}
+
+#bg-layer {
+ background-color: var(--body-background-color);
+ display: block;
+ position: absolute;
+ left: 0px;
+ right: 0px;
+ bottom: 0px;
+ top: 0px;
+ z-index: 0;
 }
 
 
@@ -168,7 +176,7 @@ nav ul li a {
 nav ul li a .vector {
   height: 1px;
   width: 1px;
-  background-color: #d6d6d6;
+  background-color: transparent;
   position: absolute;
   left: 50%;
   transform: translateY(0vh);
@@ -243,13 +251,8 @@ ul.list li:last-child:after {
 }
 
 .work {
-  /*background-color: var(--body-background-color);*/
-  /*background-color: #fff;*/
   margin: 0rem 0rem;
-  /*padding: 2rem 10rem;*/
   border: 1px solid var(--container-background-color);
-  /*overflow-y: scroll;*/
-  /*max-height: 20rem;*/
 }
 
 
