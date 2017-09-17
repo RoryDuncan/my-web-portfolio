@@ -11,6 +11,7 @@ body {
   --body-color: #a5a7aa;
   --highlight-color: #F6BD95;
   --link-color: #6aa;
+  --heading-color: #532;
   
   font-family: 'Work Sans', sans-serif;
   width: 100vw;
@@ -40,16 +41,14 @@ body {
 }
 
 a,
-a:link,
-a:visited {
+a:link {
   color: var(--link-color);
   text-decoration: none;
 }
 
 a:hover,
-a:link:hover,
-a:visited:hover {
-  text-decoration: underline;
+a:link:hover {
+  
 }
 
 ::selection {
@@ -103,7 +102,7 @@ content h3,
 content h4,
 content h5 {
   margin: 0 0;
-  color: #532;
+  color: var(--heading-color);
   font-weight: 200;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -138,7 +137,6 @@ nav ul {
   font-size: 0;
   padding: 0 0;
   margin: 0 0;
-  /*background: linear-gradient(180deg, var(--body-background-color) 0%, #000 100%);*/
   text-align: center;
   display: flex;
   justify-content: center;
@@ -150,19 +148,20 @@ nav ul li {
   position: relative;
 }
 
-nav ul li a:link {
+nav ul li a {
   display: block;
   width: auto;
-  padding: 0rem 2rem;
-  color: #777;
-  /*background-color: #fff;*/
+  padding: 0rem 0.5rem;
+  margin: 0 1.5rem;
   text-decoration: none;
-  /*border-right: 1px solid rgba(0,0,0,0.05);*/
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 1px;
   transition: 0.2s ease-out all;
   position: relative;
+  color: #666;
+  background-color: var(--body-background-color);
+  border: 1px solid transparent;
 }
 
 
@@ -173,35 +172,49 @@ nav ul li a .vector {
   position: absolute;
   left: 50%;
   transform: translateY(0vh);
+  height: 33vh;
+  bottom: 2vh;
   z-index: -1;
   text-align: center;
 }
 
 nav ul li a:hover {
-   background-color: var(--body-background-color);
-  color: #000;
+ border: 1px solid #000;
+ color: #222;
 }
 
 nav ul li a:hover .vector {
-  background-color: var(--container-background-color);
+  background-color: #666;
   height: 33vh;
   bottom: 2vh;
   transition: 0.7s ease-in height;
 }
 
-nav ul li a:focus .vector {
-  background-color: #aaa;
-  height: 4vh;
-  bottom: 33vh;
-  transition: 2s ease-out bottom;
+nav ul li a:active {
+  opacity: 0.5;
+  transition: 0.15s ease-in all;
 }
 
-nav ul li a:before {
-  content: "░";
-  margin-left: -1rem;
-  color: #000;
-  opacity: 0;
-  position: absolute;
+
+nav ul li a.active {
+  color: #ddc;
+  background-color: var(--container-background-color);
+}
+
+nav ul li .active .vector {
+  background-color: var(--container-background-color);
+}
+
+ul.vantages {
+  list-style: square;
+  color: #444;
+  margin: 0 0;
+  padding: 0 0 0 1rem;
+}
+
+ul.vantages li p {
+  color: var(--body-color);
+  font-size: 1rem;
 }
 
 ul.list {
@@ -229,11 +242,6 @@ ul.list li:last-child:after {
   content: ".";
 }
 
-nav ul li .active:before {
-  opacity: 1;
-  animation: 0.5s linear blink infinite alternate-reverse;
-}
-
 .work {
   /*background-color: var(--body-background-color);*/
   /*background-color: #fff;*/
@@ -247,12 +255,40 @@ nav ul li .active:before {
 
 .work-history {
   list-style: none;
-  padding: 1rem 0;
+  padding: 0 0;
+  margin: 0 0;
   font-size: 0.8rem;
+  border-left: 1px solid #333;
+  padding-left: 3rem;
+  margin-left: 1rem;
 }
 
 .work-history .item {
+  position: relative;
   margin-bottom: 1rem;
+  padding-left: 0rem;
+}
+
+.work-history .item:hover .positions .position {
+  color: #ffe;
+}
+
+.work-history .item:before {
+  content: "";
+  display: block;
+  width: 0.25rem;
+  height: 0.25rem;
+  left: -3.125rem;
+  top: 1.25rem;
+  position: absolute;
+  background-color: #3a3a3a;
+  will-change: background-color;
+  
+}
+
+.work-history .item:hover:before {
+  transition: 0.2s ease-out all;
+  background-color: #888;
 }
 
 .work-history .positions {
@@ -292,6 +328,26 @@ nav ul li .active:before {
   opacity: 0.4;
 }
 
+ul.interests {
+  list-style: square;
+}
+
+ul.interests .interest {
+  color: #666;
+}
+
+ul.interests .interest:after {
+  color: var(--body-color);
+}
+
+ul.interests .interest:hover {
+  color: var(--highlight-color);
+}
+
+
+.animation--change-page {
+  animation: 1s change-page ease-in-out;
+}
 
 
 @keyframes blink {
@@ -304,3 +360,22 @@ nav ul li .active:before {
   }
 }
 
+@keyframes change-page {
+  0% {
+    opacity: 1;
+    transform: skewX(0);
+    
+  }
+  
+  
+  50% {
+    opacity: 0;
+    transform: skewX(5);
+    
+  }
+  
+  100% {
+    opacity: 1;
+    transform: skewX(0);
+  }
+}

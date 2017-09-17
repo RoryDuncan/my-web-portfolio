@@ -5,6 +5,7 @@ console.log("hey", pages);
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
+
 [].forEach.call( anchors, (el) => {
   el.addEventListener("click", (e) => {
     let page = e.target.getAttribute("href"); 
@@ -21,23 +22,28 @@ const removeActiveNavClass = () => {
   [].forEach.call( anchors, (el) => el.classList.remove("active"));
 };
 
-const changePageContentTo = (page) => {
+const changePageContentTo = (pageHref) => {
   
-  let pageName = (page.split(".html") || [null])[0];
+  let pageName = (pageHref.split(".html") || [null])[0];
   
   if (pageName == null) {
     console.log("Invalid page:", pageName)
     return;
   }
   
+  content.classList.add("animation--change-page")
+  
+  
   if (pageName === "" || pageName === "index") pageName = "introduction";
   
-  let pageContent = pages[pageName];
-  if (!pageContent) {
+  let page = pages[pageName];
+  if (!page) {
+    document.title = "404 Not Found";
     content.innerHTML = "No content found.";
   }
   else {
-    content.innerHTML = pageContent;
+    document.title = page.title
+    content.innerHTML = page.content;
   }
   
 }
