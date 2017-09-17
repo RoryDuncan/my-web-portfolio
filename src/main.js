@@ -1,6 +1,6 @@
 
 import pages from "./pages";
-import "./canvas-background.js";
+import renderer from "./canvas-background.js";
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");

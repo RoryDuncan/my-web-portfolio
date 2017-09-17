@@ -17,12 +17,7 @@ const previousMouse = {
   y: 0,
 };
 
-
-const timedThrottle = () => {
-  this.lastInstance  
-}
-
-const blip = (x, y) => {
+const renderBlip = (x, y) => {
   let size = gridSize;
   let halfSize = size / 2;
   $.fillStyle = "#bbb";
@@ -35,20 +30,24 @@ const normalizeMouse = (x, y) => {
   return [+_x, +_y];
 };
 
-let clicks 
+// prevent right clicking.
+canvas.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+})
 
 canvas.addEventListener("mousemove", (e) => {
   previousMouse.x = mouse.x;
   previousMouse.y = mouse.y;
   [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   
-  blip(mouse.x, mouse.y);
-  let chance = Math.random();
-  if (chance >= 0.75) blip(mouse.x - gridSize, mouse.y);
-   chance = Math.random();
-  if (chance >= 0.75) blip(mouse.x + gridSize, mouse.y);
-  chance = Math.random();
-  if (chance >= 0.75) blip(mouse.x, mouse.y + gridSize);
-  chance = Math.random();
-  if (chance >= 0.75) blip(mouse.x, mouse.y - gridSize);
+  renderBlip(mouse.x, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x - gridSize, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x + gridSize, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y + gridSize);
+  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y - gridSize);
 });
+
+export default {
+  canvas,
+  context: $,
+}
