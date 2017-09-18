@@ -74,17 +74,11 @@ canvas.addEventListener("contextmenu", (e) => {
 });
 
 canvas.addEventListener("mousemove", (e) => {
-  [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   
+  [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   renderBlipGroup(mouse.x, mouse.y);
 
 });
-
-// canvas.addEventListener("mouseup", (e) => {
-//   let margin = gridSize/2;
-//   let [x, y] = normalizeMouse(e.clientX, e.clientY);
-//   $.fillStyle = "#bbb";
-// });
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");

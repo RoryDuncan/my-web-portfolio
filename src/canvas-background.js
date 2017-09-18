@@ -11,11 +11,6 @@ const mouse = {
   y: 0,
 };
 
-const previousMouse = {
-  x: 0,
-  y: 0,
-};
-
 $.fillStyle = "#bbb";
 
 const renderBlip = (x, y) => {
@@ -44,19 +39,11 @@ canvas.addEventListener("contextmenu", (e) => {
 })
 
 canvas.addEventListener("mousemove", (e) => {
-  previousMouse.x = mouse.x;
-  previousMouse.y = mouse.y;
-  [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   
+  [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   renderBlipGroup(mouse.x, mouse.y);
 
 });
-
-// canvas.addEventListener("mouseup", (e) => {
-//   let margin = gridSize/2;
-//   let [x, y] = normalizeMouse(e.clientX, e.clientY);
-//   $.fillStyle = "#bbb";
-// });
 
 
 export default {
