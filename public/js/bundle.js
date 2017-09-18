@@ -38,20 +38,28 @@ let canvas = document.getElementById("bg-layer");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+const $ = canvas.getContext("2d");
 const gridSize = 10;
 
-
-const $ = canvas.getContext("2d");
 const mouse = {
   x: 0,
   y: 0,
 };
 
+$.fillStyle = "#bbb";
+
 const renderBlip = (x, y) => {
   let size = gridSize;
   let halfSize = size / 2;
-  $.fillStyle = "#bbb";
   $.fillRect(x - halfSize, y - halfSize, halfSize, halfSize);
+};
+
+const renderBlipGroup = (x, y) => {
+  renderBlip(mouse.x, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x - gridSize, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x + gridSize, mouse.y);
+  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y + gridSize);
+  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y - gridSize);
 };
 
 const normalizeMouse = (x, y) => {
@@ -68,12 +76,15 @@ canvas.addEventListener("contextmenu", (e) => {
 canvas.addEventListener("mousemove", (e) => {
   [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
   
-  renderBlip(mouse.x, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x - gridSize, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x + gridSize, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y + gridSize);
-  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y - gridSize);
+  renderBlipGroup(mouse.x, mouse.y);
+
 });
+
+// canvas.addEventListener("mouseup", (e) => {
+//   let margin = gridSize/2;
+//   let [x, y] = normalizeMouse(e.clientX, e.clientY);
+//   $.fillStyle = "#bbb";
+// });
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
