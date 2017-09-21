@@ -1,17 +1,18 @@
 
 html {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.8rem;
 }
 
 
 body {
-  --body-background-color: #e4e4e5;
-  --container-background-color: #161616;
+  --body-background-color: #161616;
+  --container-background-color: transparent;
   --body-color: #cfcac5;
   --highlight-color: #F6BD95;
   --link-color: #6aa;
   --heading-color: #532;
+  --container-size: 100%;
   
   font-family: 'Work Sans', sans-serif;
   width: 100vw;
@@ -19,26 +20,25 @@ body {
   padding: 0 0;
   margin: 0 0;
   display: grid;
-  grid-template-columns: [left-gutter] auto [content] 50rem [right-gutter] auto;
-  grid-template-rows: [top-gutter] auto [content] 50rem [bottom-gutter] auto;
+  grid-template-columns: [left-gutter] auto [content] var(--container-size) [right-gutter] auto;
+  grid-template-rows: [top-gutter] auto [content] var(--container-size) [bottom-gutter] auto;
   color: var(--body-color);
   background: var(--body-background-color);
   transition: 0.1s linear background;
 }
 
+
 .container {
-  display: grid;
   grid-column-start: content;
   grid-row-start: content;
-  grid-template-columns: 20rem 20rem;
-  grid-template-rows: 20rem 20rem 10rem;
-  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2); 
-  z-index: 10;
-  justify-content: space-evenly;
-  align-content: space-evenly;
+  padding: 1rem 2rem;
+  
+  z-index: 0;
   background: var(--container-background-color);
   transition: 0.1s linear background;
 }
+
+
 
 .inverse {
   transition: 0.1s linear background;
@@ -74,7 +74,7 @@ content a:hover {
 
 header {
   color: #ccc;
-  padding-left: 2rem;
+  
   grid-column: 1 / 3;
   grid-row: 1;
   font-family: 'Work Sans', sans-serif;
@@ -85,17 +85,15 @@ header {
 header .brand-title {
   font-weight: 400;
   display: block;
-  font-size: 4rem;
-}
-
-header .description {
-  margin-top: 2rem;
+  font-size: 2rem;
+  line-height: 1em;
+  margin-bottom: 2rem;
 }
 
 header .symbol {
   color: #456;
   user-select: none;
-  display: inline-block;
+  display: none;
   margin: 0 0.5rem;
   transition: 0.1s ease-in-out all;
   will-change: transform, color;
@@ -122,7 +120,7 @@ content h5 {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  
+  line-height: 1.6em;
 }
 
 .introduction {
@@ -140,47 +138,44 @@ content h5 {
 
 }
 
+
 nav {
-  position: fixed;
-  bottom: 1rem;
-  left: 0px;
-  right: 0px;
+  grid-column-start: content;
+  z-index: 11;
 }
 
 nav ul {
+  padding: 2rem 1rem;
   list-style: none;
   font-size: 0;
-  padding: 0 0;
   margin: 0 0;
-  text-align: center;
-  display: flex;
-  justify-content: center;
 }
 
 nav ul li {
   font-size: 1rem;
   width: auto;
-  position: relative;
+  display: inline;
+  min-width: 50%;
+  float: left;
 }
 
 nav ul li a {
+  text-align: center;
   display: block;
-  width: auto;
   padding: 0rem 0.5rem;
-  margin: 0 1.5rem;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 0.75rem;
   letter-spacing: 1px;
   transition: 0.2s ease-out all;
-  position: relative;
   color: #666;
   border: 1px solid transparent;
   user-select: none;
+  font-size: 0.75rem;
 }
 
 
 nav ul li a .vector {
+  visibility: hidden;
   height: 1px;
   width: 1px;
   background-color: transparent;
@@ -204,6 +199,53 @@ nav ul li a:hover .vector {
   bottom: 2vh;
   transition: 0.7s ease-in height;
 }
+
+
+@media screen and (min-width: 55rem) {
+  
+  html {
+    font-size: 18px;
+  }
+  
+  nav {
+    grid-column-start: auto;
+    position: fixed;
+    bottom: 1rem;
+    left: 0px;
+    right: 0px;
+  }
+  
+  nav ul {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 0;
+  }
+  
+  nav ul li {
+    position: relative;
+    float: none;
+    width: auto;
+  }
+  
+  nav ul li a {
+    width: auto;
+    margin: 0 1.5rem;
+    position: relative;
+  }
+  
+  nav ul li a .vector {
+    visibility: visible;
+    
+  }
+  
+  .work {
+    max-height: 30rem;
+    overflow-y: scroll;
+  }
+  
+}
+
 
 nav ul li a:active {
   opacity: 0.5;
@@ -258,11 +300,7 @@ ul.list li:last-child:after {
 }
 
 .work {
-  margin: -2rem -5rem -5rem 0rem;
-  padding-right: 2rem;
-  height: auto;
-  max-height: 30rem;
-  overflow-y: scroll;
+  
   
 }
 
@@ -395,12 +433,6 @@ ul.connecting-means {
   margin-top: 2rem;
 }
 
-ul.connecting-means li {
-  display: block;
-  width: 50%;
-  float: left;
-}
-
 
 ul.connecting-means li a {
   display: inline-block;
@@ -468,6 +500,53 @@ ul.connecting-means li a:hover:after {
   100% {
     opacity: 1;
     transform: skewX(0);
+  }
+}
+
+@media screen and (min-width: 55rem) {
+  body {
+    --body-background-color: #e4e4e5;
+    --container-background-color: #161616;
+    --container-size: 50rem;
+  }
+  
+  .container {
+    display: grid;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2); 
+    
+    grid-template-columns: 20rem 20rem;
+    grid-template-rows: 20rem 20rem 10rem;
+  }
+  
+  header {
+    padding-left: 2rem;
+  }
+  
+  header .brand-title {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+  
+  header .description {
+    margin-top: 2rem;
+  }
+  
+  header .symbol {
+    display: inline-block;
+  }
+  
+  ul.connecting-means li {
+    display: block;
+    min-width: 50%;
+    float: left;
+  }
+  
+  .work {
+    margin: -2rem -5rem -5rem 0rem;
+    padding-right: 2rem;
+    height: auto;
   }
 }
 
