@@ -32,7 +32,6 @@ body {
   grid-column-start: content;
   grid-row-start: content;
   padding: 1rem 2rem;
-  position: relative;
   z-index: 0;
   background: var(--container-background-color);
   transition: 0.1s linear background;
@@ -607,6 +606,7 @@ ul.connecting-means li a:hover {
   }
   
   .work-history .item .location:before {
+    margin: 0 0;
     content: "";
   }
   
