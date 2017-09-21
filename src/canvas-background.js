@@ -56,7 +56,10 @@ canvas.addEventListener("mousemove", (e) => {
 });
 
 const changeBackgroundEffect = (effect) => {
-  
+  let test = pageEffects[effect];
+  if (typeof test !== "undefined") {
+    page = effect;    
+  }
 }
 
 

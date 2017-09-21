@@ -8,7 +8,7 @@ html {
 body {
   --body-background-color: #e4e4e5;
   --container-background-color: #161616;
-  --body-color: #a5a7aa;
+  --body-color: #cfcac5;
   --highlight-color: #F6BD95;
   --link-color: #6aa;
   --heading-color: #532;
@@ -269,7 +269,7 @@ ul.list li:last-child:after {
 .work::-webkit-scrollbar {
   width: 5px;
   height: 8px;
-  background-color: #bbb;
+  background-color: #333;
 }
 
 .work::-webkit-scrollbar-thumb {
@@ -476,7 +476,7 @@ ul.connecting-means li a:hover:after {
   
 .work h1 {
   position: absolute;
-  left: 10vw;
+  left: 10rem;
   top: 14vh;
 }
   
@@ -506,6 +506,18 @@ ul.connecting-means li a:hover:after {
     transform: translateY(0rem);
     ;
   }
+  
+  .work-history .item .business-name,
+  .work-history .item .location {
+    background-color: var(--container-background-color);
+    padding: 0.25rem 0.5rem;
+    color:  var(--body-color);
+  }
+  
+  .work-history .item .location:before {
+    content: "";
+  }
+  
   
   .work-history .item:hover:before {
     background-color: var(--link-color);
