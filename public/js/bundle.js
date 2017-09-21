@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-var about = "\n<div class=\"about\">\n  <h1>About Me </h1>\n  <p>Located in Chico, CA; I spend a greater portion of my time working on side projects or helping friends with theirs. I have a passion for entrepreneurship and software, and their application for making society healthier and more educated.</p>\n  <p>I aim to be communicative, transparent, and mindful, in everything that I do.</p>\n  <h3>Other Interests</h3>\n  <ul class=\"interests\">\n    <li class=\"interest\">hiking / exploring</li>\n    <li class=\"interest\">Coffee</li>\n    <li class=\"interest\">Design</li>\n    <li class=\"interest\">Video Games and eSports</li>\n    <li class=\"interest\">Post-Punk and Post-Hardcore Music</li>\n    <li class=\"interest\">Video game development / interactive art</li>\n    <li class=\"interest\">Hayao Miyazaki / Wes Anderson Films</li>\n  </ul>\n</div>";
+var about = "\n<div class=\"about\">\n  <h1>About Me </h1>\n  <p>Located in Chico, CA; I spend a greater portion of my time working on side projects or helping friends with theirs. I have a passion for entrepreneurship and software, and their application for making society healthier and more educated.</p>\n  <p>I am communicative, transparent, and mindful, in everything that I do.</p>\n  <h3>Other Interests</h3>\n  <ul class=\"interests\">\n    <li class=\"interest\">hiking / exploring</li>\n    <li class=\"interest\">Coffee</li>\n    <li class=\"interest\">Design</li>\n    <li class=\"interest\">Video Games and eSports</li>\n    <li class=\"interest\">Post-Punk and Post-Hardcore Music</li>\n    <li class=\"interest\">Video game development / interactive art</li>\n    <li class=\"interest\">Hayao Miyazaki / Wes Anderson Films</li>\n  </ul>\n</div>";
 
 var introduction = "\n<div class=\"introduction\">\n  <h1>Introduction</h1>\n  <div class=\"skills\">\n    <p>I have a focused interest in product development—from a software engineering perspective. My related soft skills are design, UI/UX, branding, authorship, and code architecture.</p>\n    <h2>Idealogies of Self</h2>\n    <ul class=\"vantages\">\n      <li> \n        <h3> <a href=\"http://www.valvesoftware.com/company/Valve_Handbook_LowRes.pdf#page=32\" target=\"_blank\" rel=\"noopener\">T-Shaped: A compound of breadth—and depth—of knowledge.</a></h3>\n        <p>Best described by Valve Software: a T-Shaped person has broad knowledge in conjunction with focused expertise.</p>\n      </li>\n      <li>\n        <h3> <a href=\"http://www.saffo.com/02008/07/26/strong-opinions-weakly-held/\" target=\"_blank\" rel=\"noopener\">Strong views, weakly held.</a></h3>\n        <p>Seemingly coined by Paul Saffo; the continued use and defense of solutions until a stronger counter-argument is provided.</p>\n      </li>\n    </ul>\n  </div>\n</div>";
 
@@ -36,17 +36,18 @@ var pages = {
 
 let canvas = document.getElementById("bg-layer");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
 const $ = canvas.getContext("2d");
 const gridSize = 10;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
 
 const mouse = {
   x: 0,
   y: 0,
 };
-
-$.fillStyle = "#bbb";
 
 const renderBlip = (x, y) => {
   let size = gridSize;
@@ -55,6 +56,7 @@ const renderBlip = (x, y) => {
 };
 
 const renderBlipGroup = (x, y) => {
+  $.fillStyle = "#bbb";
   renderBlip(mouse.x, mouse.y);
   if (Math.random() >= 0.75) renderBlip(mouse.x - gridSize, mouse.y);
   if (Math.random() >= 0.75) renderBlip(mouse.x + gridSize, mouse.y);
@@ -82,6 +84,38 @@ const pageEffects = {
   
 };
 
+const debounce = (ms, fn) => {
+  let timeoutID = null;
+  
+  return () => {
+    if (timeoutID != null) {
+      window.clearTimeout(timeoutID);
+    } 
+    timeoutID = window.setTimeout(() => {
+      timeoutID = null;
+      fn();
+    }, ms);
+  }
+};
+
+window.addEventListener("resize", debounce(250, () => {
+  
+  // first copy the data from the current canvas
+  let offscreen = document.createElement("canvas");
+  offscreen.width = window.innerWidth;
+  offscreen.height = window.innerHeight;
+  let $offscreen = offscreen.getContext("2d");
+  $offscreen.drawImage(canvas, 0, 0);
+  
+  // resize, which clears the image
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  
+  // redraw
+  $.drawImage(offscreen, 0, 0);
+  
+}));
+
 canvas.addEventListener("mousemove", (e) => {
   
   [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
@@ -92,7 +126,6 @@ canvas.addEventListener("mousemove", (e) => {
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
-
 
 [].forEach.call( anchors, (el) => {
   el.addEventListener("click", (e) => {
