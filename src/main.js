@@ -5,7 +5,6 @@ import renderer from "./canvas-background.js";
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
 
-
 [].forEach.call( anchors, (el) => {
   el.addEventListener("click", (e) => {
     let page = e.target.getAttribute("href"); 
