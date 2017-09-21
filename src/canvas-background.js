@@ -38,15 +38,30 @@ canvas.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 })
 
+let page = "blip-grid";
+const pageEffects = {
+  
+  "blip-grid": (mouse) => {
+    renderBlipGroup(mouse.x, mouse.y);  
+  },
+  
+}
+
 canvas.addEventListener("mousemove", (e) => {
   
   [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
-  renderBlipGroup(mouse.x, mouse.y);
+  let effect = pageEffects[page];
+  effect.call(effect, mouse);
 
 });
+
+const changeBackgroundEffect = (effect) => {
+  
+}
 
 
 export default {
   canvas,
   context: $,
+  changeBackgroundEffect,
 }
