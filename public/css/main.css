@@ -14,6 +14,7 @@ body {
   --heading-color: #532;
   --container-size: 100%;
   
+  overflow-x: hidden;
   font-family: 'Work Sans', sans-serif;
   width: 100vw;
   height: 100vh;
@@ -61,7 +62,7 @@ content a:hover {
 }
 
 #bg-layer {
- display: block;
+ display: none;
  position: absolute;
  left: 0px;
  right: 0px;
@@ -198,58 +199,6 @@ nav ul li a:hover .vector {
   bottom: 2vh;
   transition: 0.7s ease-in height;
 }
-
-
-@media screen and (min-width: 55rem) {
-  
-  html {
-    font-size: 18px;
-  }
-  
-  .container {
-    z-index: 10;
-  }
-  
-  nav {
-    grid-column-start: auto;
-    position: fixed;
-    bottom: 1rem;
-    left: 0px;
-    right: 0px;
-    z-index: 10;
-  }
-  
-  nav ul {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    padding: 0 0;
-  }
-  
-  nav ul li {
-    position: relative;
-    float: none;
-    width: auto;
-  }
-  
-  nav ul li a {
-    width: auto;
-    margin: 0 1.5rem;
-    position: relative;
-  }
-  
-  nav ul li a .vector {
-    visibility: visible;
-    
-  }
-  
-  .work {
-    max-height: 30rem;
-    overflow-y: scroll;
-  }
-  
-}
-
 
 nav ul li a:active {
   opacity: 0.5;
@@ -504,10 +453,62 @@ ul.connecting-means li a:hover {
 }
 
 @media screen and (min-width: 55rem) {
+  
+  html {
+    font-size: 18px;
+  }
+  
   body {
+    overflow-x: auto;
     --body-background-color: #e4e4e5;
     --container-background-color: #161616;
     --container-size: 50rem;
+  }
+  
+  #bg-layer {
+    display: block;
+  }
+  
+  .container {
+    z-index: 10;
+  }
+  
+  nav {
+    grid-column-start: auto;
+    position: fixed;
+    bottom: 1rem;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+  }
+  
+  nav ul {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 0 0;
+  }
+  
+  nav ul li {
+    position: relative;
+    float: none;
+    width: auto;
+  }
+  
+  nav ul li a {
+    width: auto;
+    margin: 0 1.5rem;
+    position: relative;
+  }
+  
+  nav ul li a .vector {
+    visibility: visible;
+    
+  }
+  
+  .work {
+    max-height: 30rem;
+    overflow-y: scroll;
   }
   
   .container {
@@ -561,6 +562,7 @@ ul.connecting-means li a:hover {
     height: auto;
   }
 }
+
 
 
 @media screen and (min-width: 120rem) {

@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 html(lang="en")
-head
-  meta(charset="UTF-8")
-  meta(name="viewport", content="width=device-width, initial-scale=1.0")
-  meta(http-equiv="X-UA-Compatible", content="ie=edge")
-  block title
-    title Introduction
-  link(href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans", rel="stylesheet")
-  link(rel="stylesheet", href="css/main.css")
-body
-  canvas#bg-layer
-  nav
-    ul.navigation
-      li
-        a(href="index.html", class=(page == "index" ? "active" : "")) Introduction
-          .vector
-      li
-        a(href="about.html", class=(page == "about" ? "active" : "")) More About Me
-          .vector
-      li 
-        a(href="work.html", class=(page == "work" ? "active" : "")) Work
-          .vector
-      li 
-        a(href="contact.html", class=(page == "contact" ? "active" : "")) Connect
-          .vector
-  .container
-    header
-      h2.brand-title Rory Duncan
-      p.professional-titles.description
-        span.symbol="⌌ "
-        | Web Developer, Software Engineer
-        span.symbol=" ⌏"
-    content
-      block content
-          
-  script(src="js/bundle.js")
-  
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    block title
+      title Introduction
+    link(href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans", rel="stylesheet")
+    link(rel="stylesheet", href="css/main.css")
+  body
+    canvas#bg-layer
+    nav
+      ul.navigation
+        li
+          a(href="index.html", class=(page == "index" ? "active" : "")) Introduction
+            .vector
+        li
+          a(href="about.html", class=(page == "about" ? "active" : "")) More About Me
+            .vector
+        li 
+          a(href="work.html", class=(page == "work" ? "active" : "")) Work
+            .vector
+        li 
+          a(href="contact.html", class=(page == "contact" ? "active" : "")) Connect
+            .vector
+    .container
+      header
+        h2.brand-title Rory Duncan
+        p.professional-titles.description
+          span.symbol="⌌ "
+          | Web Developer, Software Engineer
+          span.symbol=" ⌏"
+      content
+        block content
+            
+    script(src="js/bundle.js")
+    
