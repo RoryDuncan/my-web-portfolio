@@ -10,8 +10,8 @@ body {
   --container-background-color: transparent;
   --body-color: #cfcac5;
   --highlight-color: #F6BD95;
-  --link-color: #6aa;
-  --heading-color: #532;
+  --link-color: #799;
+  --heading-color: #755;
   --container-size: 100%;
   
   overflow-x: hidden;
@@ -91,7 +91,8 @@ header .brand-title {
 }
 
 header .symbol {
-  color: #456;
+  
+  color: #333;
   user-select: none;
   display: none;
   margin: 0 0.5rem;
@@ -129,15 +130,8 @@ content h5 {
 
 .professional-titles {
   color: var(--highlight-color);
+  padding: 0 0rem;
 }
-
-.professional-titles:hover .symbol {
-  
-  transform: rotate(-90deg);
-  transition: 0.2s ease-in-out all 0s;
-
-}
-
 
 nav {
   grid-column-start: content;
@@ -306,7 +300,7 @@ ul.list li:last-child:after {
   
 }
 
-.work-history .item:hover:before {
+.work-history .item:hov er:before {
   transition: 0.2s ease-out all;
   background-color: #888;
 }
@@ -356,7 +350,8 @@ ul.list li:last-child:after {
   opacity: 0;
 }
 
-.work-history .item:hover .description {
+.work-history .item:hover .description,
+.work-history .item:focus .description{
   max-height: 16rem;
   height: auto;
   opacity: 1;
@@ -452,7 +447,10 @@ ul.connecting-means li a:hover {
   }
 }
 
+
+
 @media screen and (min-width: 55rem) {
+  
   
   html {
     font-size: 18px;
@@ -465,6 +463,29 @@ ul.connecting-means li a:hover {
     --container-size: 50rem;
   }
   
+  
+  nav {
+    /*position: fixed;*/
+    /*top: 0px;*/
+    /*right: 20vw;*/
+    /*bottom: 0px;*/
+    /*left: 0px;*/
+    /*right: 0px;*/
+    grid-column: 2/3;
+    grid-row: 2/3;
+  }
+  
+  nav ul {
+    /*height: 50vh;*/
+    display: flex;
+    
+    justify-content: space-evenly;
+  }
+  
+  nav ul li {
+    min-width: auto;
+  }
+  
   #bg-layer {
     display: block;
   }
@@ -472,6 +493,48 @@ ul.connecting-means li a:hover {
   .container {
     z-index: 10;
   }
+  
+  .work {
+    max-height: 30rem;
+    overflow-y: scroll;
+  }
+  
+  .container {
+    display: grid;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2); 
+    
+    grid-template-columns: 20rem 20rem;
+    grid-template-rows: 10rem 20rem 10rem;
+  }
+  
+  header {
+    padding-left: 2rem;
+  }
+  
+  header .brand-title {
+  font-size: 4rem;
+    margin-bottom: 2rem;
+  }
+  
+  header .description {
+    margin-top: 2rem;
+  }
+  
+  /*header .symbol {*/
+  /*  display: inline-block;*/
+  /*}*/
+  
+  
+  .work {
+    margin: -2rem -5rem -5rem 0rem;
+    padding-right: 2rem;
+    height: auto;
+  }
+}
+
+@media screen and (min-height: 65rem) and (min-width: 55rem) {
   
   nav {
     grid-column-start: auto;
@@ -506,38 +569,6 @@ ul.connecting-means li a:hover {
     
   }
   
-  .work {
-    max-height: 30rem;
-    overflow-y: scroll;
-  }
-  
-  .container {
-    display: grid;
-    justify-content: space-evenly;
-    align-content: space-evenly;
-    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2); 
-    
-    grid-template-columns: 20rem 20rem;
-    grid-template-rows: 20rem 20rem 10rem;
-  }
-  
-  header {
-    padding-left: 2rem;
-  }
-  
-  header .brand-title {
-  font-size: 4rem;
-    margin-bottom: 2rem;
-  }
-  
-  header .description {
-    margin-top: 2rem;
-  }
-  
-  header .symbol {
-    display: inline-block;
-  }
-  
   nav ul li {
     min-width: auto;
   }
@@ -556,14 +587,7 @@ ul.connecting-means li a:hover {
     opacity: 1;
   }
   
-  .work {
-    margin: -2rem -5rem -5rem 0rem;
-    padding-right: 2rem;
-    height: auto;
-  }
 }
-
-
 
 @media screen and (min-width: 120rem) {
   
