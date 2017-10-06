@@ -360,19 +360,19 @@ ul.list li:last-child:after {
 
 
 ul.interests {
-  list-style: square;
+  padding: 0 0;
+  list-style: none;
+  color: var(--link-color);
 }
 
 ul.interests .interest {
-  color: #666;
-}
-
-ul.interests .interest:after {
-  color: var(--body-color);
+  margin-bottom: 0.25rem;
+  padding: 0rem 1rem;
+  
 }
 
 ul.interests .interest:hover {
-  color: var(--highlight-color);
+  
 }
 
 ul.connecting-means {
@@ -602,6 +602,7 @@ ul.connecting-means li a:hover {
 }
   
 .work-history {
+    background-color: var(--body-background-color);
     padding-top: 16.5vh;
     position: absolute;
     left: 2rem;
