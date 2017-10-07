@@ -202,8 +202,8 @@ const changePageContentTo = (pageHref) => {
     window.location = "/page-not-found";
   }
   else {
-    document.title = page.title;
     content.innerHTML = page.content;
+    document.title = page.title;
   }
   
 };
