@@ -16,9 +16,11 @@ const pages =  [
 var env = "prod";
 var flag = process.argv[2];
 var css = fs.readFileSync("public/css/main.css", {encoding: "utf8"});
+var pretty = false;
 
 if (flag === "env=development" || flag === "env=dev") {
   env = "dev";
+  pretty = true;
 }
 
 
@@ -27,7 +29,7 @@ const renderPugIntoHTML = (filename, i, arr) => {
   let input = `src/views/pages/${filename}.pug`;
   let output = `public/${filename}.html`;
   let html = pug.renderFile(input, { 
-    pretty: true,
+    pretty: pretty,
     page:   filename,
     env:    env,
     css:    css,
