@@ -7,7 +7,11 @@ html(lang="en")
     block title
       title Introduction
     link(href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans", rel="stylesheet")
-    link(rel="stylesheet", href="css/main.css")
+    
+    if env == "dev"
+      link(rel="stylesheet", href="css/main.css")
+    else
+      style!=css
   body
     canvas#bg-layer
     nav

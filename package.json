@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:js": "rollup -c --watch",
-    "build:html": "node build-html.js"
+    "build:html": "node build-html.js env=dev",
+    "build": "rollup -c && node build-html.js",
+    "deploy": "npm run build && firebase deploy"
   },
   "repository": {
     "type": "git",

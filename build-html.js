@@ -11,11 +11,27 @@ const pages =  [
 ];
 
 
+// check if "env=dev" was passed.
+// in development we link to the css stylesheet, while in prod we inline it into the layout
+var env = "prod";
+var flag = process.argv[2];
+var css = fs.readFileSync("public/css/main.css", {encoding: "utf8"});
+
+if (flag === "env=development" || flag === "env=dev") {
+  env = "dev";
+}
+
+
 const renderPugIntoHTML = (filename, i, arr) => {
   
   let input = `src/views/pages/${filename}.pug`;
   let output = `public/${filename}.html`;
-  let html = pug.renderFile(input, {pretty: true, page: filename});
+  let html = pug.renderFile(input, { 
+    pretty: true,
+    page:   filename,
+    env:    env,
+    css:    css,
+  });
   let tally = `(${i + 1} of ${arr.length + 1})`;
   
   fs.writeFile(output, html, "utf8", function (err) {
