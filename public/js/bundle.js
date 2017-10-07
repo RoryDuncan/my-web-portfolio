@@ -175,7 +175,7 @@ let anchors = document.querySelectorAll("nav a");
     window.history.pushState(page, null, e.target.getAttribute("href"));
     changePageContentTo(page);
     
-    if (page == "work.html") {
+    if (page == "/work") {
       renderer.changeBackgroundEffect("blip-line");
     }
     else {
@@ -193,20 +193,13 @@ const removeActiveNavClass = () => {
 
 const changePageContentTo = (pageHref) => {
   
-  let pageName = (pageHref.split(".html") || [null])[0];
-  
-  if (pageName == null) {
-    console.log("Invalid page:", pageName);
-    return;
-  }
-  
+  let pageName = pageHref.substr(1);
   
   if (pageName === "" || pageName === "index") pageName = "introduction";
   
   let page = pages[pageName];
   if (!page) {
-    document.title = "404 Not Found";
-    content.innerHTML = "No content found.";
+    window.location = "/page-not-found";
   }
   else {
     document.title = page.title;
