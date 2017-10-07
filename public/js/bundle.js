@@ -194,6 +194,7 @@ const removeActiveNavClass = () => {
 const changePageContentTo = (pageHref) => {
   
   let pageName = pageHref.substr(1);
+  console.log(pageName);
   
   if (pageName === "" || pageName === "index") pageName = "introduction";
   
