@@ -55,13 +55,28 @@ const renderBlip = (x, y) => {
   $.fillRect(x - halfSize, y - halfSize, halfSize, halfSize);
 };
 
-const renderBlipGroup = (x, y) => {
-  $.fillStyle = "#bbb";
-  renderBlip(mouse.x, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x - gridSize, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x + gridSize, mouse.y);
-  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y + gridSize);
-  if (Math.random() >= 0.75) renderBlip(mouse.x, mouse.y - gridSize);
+const renderBlipGroup = (x, y, color1, color2) => {
+  $.fillStyle = color1 || "#bbb";
+  renderBlip(x, y);
+  $.fillStyle = color2 || "#d2d2d2";
+  /*if (Math.random() >= 0.75)*/ renderBlip(x - gridSize, y);
+  /*if (Math.random() >= 0.75)*/ renderBlip(x + gridSize, y);
+  /*if (Math.random() >= 0.75)*/ renderBlip(x, y + gridSize);
+  /*if (Math.random() >= 0.75)*/ renderBlip(x, y - gridSize);
+};
+
+const renderBlipCluster = (x, y, color1, color2) => {
+  
+  var modifiers = [4, 4, 4, 4].map(a => ~~(Math.random()*a));
+  var origins = modifiers.map((a, i) => { 
+    return {
+      x: x + (gridSize * a * (i == 0 || i == 3 ? -1 : 1)),
+      y: y + (gridSize * a * (i == 1 || i == 3 ? -1 : 1)),
+    };
+  });
+  
+  origins.forEach(a => renderBlipGroup(a.x, a.y, color1, color2));
+  
 };
 
 const normalizeMouse = (x, y) => {
@@ -75,14 +90,33 @@ canvas.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 });
 
-let page = "blip-grid";
+let isWorkPage = (window.location.pathname.split("work").length > 1);
+let currentEffect = isWorkPage ? "blip-line" : "blip-grid";
 const pageEffects = {
   
   "blip-grid": (mouse) => {
-    renderBlipGroup(mouse.x, mouse.y);  
+    renderBlipCluster(mouse.x, mouse.y);  
+  },
+  
+  "blip-line": (mouse) => {
+    var dir = Math.random() >= 0.51 ? 1 : -1;
+    var mods = new Array(20).fill(1).map((a, i) => gridSize * a * i * dir);
+      
+      $.fillStyle = "#e4e4e5";
+      
+      mods.forEach(a => renderBlip(mouse.x, mouse.y + a));
+    
   },
   
 };
+
+const changeBackgroundEffect = (effect) => {
+  let test = pageEffects[effect];
+  if (typeof test !== "undefined") {
+    currentEffect = effect;    
+  }
+};
+
 
 const debounce = (ms, fn) => {
   let timeoutID = null;
@@ -119,10 +153,16 @@ window.addEventListener("resize", debounce(250, () => {
 canvas.addEventListener("mousemove", (e) => {
   
   [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
-  let effect = pageEffects[page];
+  let effect = pageEffects[currentEffect];
   effect.call(effect, mouse);
 
 });
+
+var renderer = {
+  canvas,
+  context: $,
+  changeBackgroundEffect,
+};
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
@@ -134,6 +174,14 @@ let anchors = document.querySelectorAll("nav a");
     e.stopPropagation();
     window.history.pushState(page, null, e.target.getAttribute("href"));
     changePageContentTo(page);
+    
+    if (page == "work.html") {
+      renderer.changeBackgroundEffect("blip-line");
+    }
+    else {
+      renderer.changeBackgroundEffect("blip-grid");
+    }
+    
     removeActiveNavClass();
     e.target.classList.add("active");
   }, false);

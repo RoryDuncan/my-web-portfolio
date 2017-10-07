@@ -12,6 +12,14 @@ let anchors = document.querySelectorAll("nav a");
     e.stopPropagation();
     window.history.pushState(page, null, e.target.getAttribute("href"));
     changePageContentTo(page);
+    
+    if (page == "work.html") {
+      renderer.changeBackgroundEffect("blip-line");
+    }
+    else {
+      renderer.changeBackgroundEffect("blip-grid")
+    }
+    
     removeActiveNavClass();
     e.target.classList.add("active");
   }, false);
