@@ -38,7 +38,15 @@ body {
   transition: 0.1s linear background;
 }
 
-
+.page-not-found {
+  grid-column-start: content;
+  grid-row-start: content;
+  margin-top: 20vh;
+  color: #161616;
+  text-align: center;
+  background: none;
+  
+}
 
 .inverse {
   transition: 0.1s linear background;
