@@ -1,5 +1,12 @@
 {
   "hosting": {
-    "public": "public"
-  }
+    "public": "public",
+    
+    // URL rewrites
+    "rewrites": [ 
+      { "source": "/index",   "destination": "/index.html" },
+      { "source": "/about",   "destination": "/about.html" },
+      { "source": "/work",    "destination": "/work.html" },
+      { "source": "/contact", "destination": "/contact.html" },
+    ]
 }
