@@ -292,7 +292,7 @@ ul.list li:last-child:after {
 }
 
 .work-history .item:hover .positions .position {
-  /*color: #666;*/
+  
 }
 
 .work-history .item:before {
@@ -473,20 +473,13 @@ ul.connecting-means li a:hover {
   
   
   nav {
-    /*position: fixed;*/
-    /*top: 0px;*/
-    /*right: 20vw;*/
-    /*bottom: 0px;*/
-    /*left: 0px;*/
-    /*right: 0px;*/
+
     grid-column: 2/3;
-    grid-row: 2/3;
+    grid-row: 1/2;
   }
   
   nav ul {
-    /*height: 50vh;*/
     display: flex;
-    
     justify-content: space-evenly;
   }
   
@@ -529,12 +522,7 @@ ul.connecting-means li a:hover {
   header .description {
     margin-top: 2rem;
   }
-  
-  /*header .symbol {*/
-  /*  display: inline-block;*/
-  /*}*/
-  
-  
+
   .work {
     margin: -2rem -5rem -5rem 0rem;
     padding-right: 2rem;
