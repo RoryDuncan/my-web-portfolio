@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 html(lang="en")
   head
+    
     meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    
+    block head
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    
     block title
       title Introduction
+      
     
+    - var jsFile = "js/bundle.js?" + Date.now();
+    script(src=jsFile async)
     
     if env == "dev"
       link(rel="stylesheet", href="css/main.css")
     else
       style!=css
+      
   body
     canvas#bg-layer
     nav
@@ -36,6 +44,4 @@ html(lang="en")
         block content
         
     link(href="https://fonts.googleapis.com/css?family=Oswald|Work+Sans", rel="stylesheet")
-    - var jsFile = "js/bundle.js?" + Date.now();
-    script(src=jsFile)
     
