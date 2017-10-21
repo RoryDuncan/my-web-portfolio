@@ -13,9 +13,11 @@ body {
   --link-color: #799;
   --heading-color: #755;
   --container-size: 100%;
+  --body-font: 'Work Sans';
+  --accent-font: 'Share Tech Mono';
   
   overflow-x: hidden;
-  font-family: 'Work Sans', sans-serif;
+  font-family: var(--body-font), sans-serif;
   width: 100vw;
   height: 100vh;
   padding: 0 0;
@@ -65,7 +67,7 @@ content a:hover {
 }
 
 ::selection {
-  color: var(--highlight-color);
+  color: #0d9;
   background: transparent;
 }
 
@@ -81,13 +83,18 @@ content a:hover {
 
 
 header {
-  color: #ccc;
+  color: #faf2f2;
+  font-family: var(--accent-font), var(--body-font), sans-serif;
+  padding: 0;
+  width: 100%;
   
   grid-column: 1 / 3;
   grid-row: 1;
-  font-family: 'Work Sans', sans-serif;
   justify-self: left;
   align-self: center;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
 }
 
 header .brand-title {
@@ -95,7 +102,7 @@ header .brand-title {
   display: block;
   font-size: 2rem;
   line-height: 1em;
-  margin-bottom: 2rem;
+  
 }
 
 header .symbol {
@@ -123,12 +130,13 @@ content h2,
 content h3,
 content h4,
 content h5 {
+  font-family: var(--accent-font), var(--body-font), sans-serif;
   margin: 0 0;
   color: var(--heading-color);
   font-weight: 200;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-size: 1rem;
+  /*text-transform: uppercase;*/
+  /*letter-spacing: 2px;*/
   line-height: 1.6em;
 }
 
@@ -139,6 +147,10 @@ content h5 {
 .professional-titles {
   color: var(--highlight-color);
   padding: 0 0rem;
+  list-style: none;
+  width: 100%;
+  text-align: left;
+  padding-left: 10rem;
 }
 
 nav {
@@ -266,7 +278,7 @@ ul.list li:last-child:after {
 }
 
 .work::-webkit-scrollbar-thumb {
-    background: #000; 
+    background: #6ca; 
 }
 
 
@@ -421,37 +433,27 @@ ul.connecting-means li a:hover {
 }
 
 .animation--change-page {
-  animation: 1s change-page ease-in-out;
+  animation: 0.2s change-page ease-in-out;
 }
 
-
-@keyframes blink {
-  from {
-    opacity: 0;
-  }
-  
-  to {
-    opacity: 1;
-  }
-}
 
 @keyframes change-page {
   0% {
     opacity: 1;
-    transform: skewX(0);
+    /*transform: translateY(0rem);*/
     
   }
   
   
   50% {
     opacity: 0;
-    transform: skewX(5);
+    /*transform: translateY(10rem);*/
     
   }
   
   100% {
     opacity: 1;
-    transform: skewX(0);
+    /*transform: translateY(0rem);*/
   }
 }
 
@@ -511,16 +513,17 @@ ul.connecting-means li a:hover {
   }
   
   header {
-    padding-left: 2rem;
+    padding: 2rem 2rem;
   }
   
   header .brand-title {
-  font-size: 4rem;
+    font-size: 3.2rem;
     margin-bottom: 2rem;
+    width: 100%;
   }
   
   header .description {
-    margin-top: 2rem;
+    padding-left: 10rem;
   }
 
   .work {

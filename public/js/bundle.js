@@ -206,8 +206,13 @@ const changePageContentTo = (pageHref) => {
     window.location = "/page-not-found";
   }
   else {
+    content.classList.add("animation--change-page");
     content.innerHTML = page.content;
     document.title = page.title;
+    
+    window.setTimeout(() => {
+      content.classList.remove("animation--change-page");    
+    }, 400);
   }
   
 };

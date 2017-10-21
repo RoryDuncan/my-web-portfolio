@@ -2,6 +2,7 @@
 import pages from "./pages";
 import renderer from "./canvas-background.js";
 
+let body = document.body;
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
 
@@ -44,8 +45,13 @@ const changePageContentTo = (pageHref) => {
     window.location = "/page-not-found";
   }
   else {
+    content.classList.add("animation--change-page")
     content.innerHTML = page.content;
     document.title = page.title;
+    
+    window.setTimeout(() => {
+      content.classList.remove("animation--change-page")    
+    }, 400)
   }
   
 }
