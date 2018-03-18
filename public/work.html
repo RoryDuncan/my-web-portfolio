@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Work History</title><script src="js/bundle.js?1521342808852" async="async"></script><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Work History</title><script src="js/bundle.js?1521353279594" async="async"></script><style>
 html {
   font-size: 16px;
   line-height: 1.8rem;
@@ -8,13 +8,14 @@ html {
 body {
   --body-background-color: #161616;
   --container-background-color: transparent;
-  --body-color: #cfcac5;
-  --highlight-color: #F6BD95;
-  --link-color: #799;
-  --heading-color: #755;
+  --body-color: #d3d2d2;
+  --highlight-color: #bbb;
+  --link-color: #0d9;
+  --heading-color: #777;
+  --selection-color: #884e55;
   --container-size: 100%;
   --body-font: 'Work Sans';
-  --accent-font: 'Share Tech Mono';
+  --accent-font: 'Average';
   
   overflow-x: hidden;
   font-family: var(--body-font), sans-serif;
@@ -67,7 +68,7 @@ content a:hover {
 }
 
 ::selection {
-  color: #0d9;
+  color: var(--selection-color);
   background: transparent;
 }
 
@@ -100,7 +101,7 @@ header {
 header .brand-title {
   font-weight: 400;
   display: block;
-  font-size: 2rem;
+  font-size: 3rem;
   line-height: 1em;
   
 }
@@ -130,13 +131,13 @@ content h2,
 content h3,
 content h4,
 content h5 {
-  font-family: var(--accent-font), var(--body-font), sans-serif;
+  font-family: var(--body-font), var(--accent-font),  sans-serif;
   margin: 0 0;
   color: var(--heading-color);
   font-weight: 200;
-  font-size: 1rem;
-  /*text-transform: uppercase;*/
-  /*letter-spacing: 2px;*/
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   line-height: 1.6em;
 }
 
@@ -146,6 +147,7 @@ content h5 {
 
 .professional-titles {
   color: var(--highlight-color);
+  font-family: var(--body-font), var(--accent-font),  sans-serif;
   padding: 0 0rem;
   list-style: none;
   width: 100%;
@@ -381,13 +383,12 @@ ul.list li:last-child:after {
 
 ul.interests {
   padding: 0 0;
-  list-style: none;
-  color: var(--link-color);
+  margin: 0rem 1rem;
 }
 
 ul.interests .interest {
   margin-bottom: 0.25rem;
-  padding: 0rem 1rem;
+  padding: 0rem 0.5rem;
   
 }
 
@@ -646,4 +647,4 @@ ul.connecting-means li a:hover {
   }
   
 }</style></head><body><canvas id="bg-layer"></canvas><nav><ul class="navigation"><li><a href="/index">Introduction<div class="vector"></div></a></li><li><a href="/about">More About Me<div class="vector"></div></a></li><li> <a class="active" href="/work">Work<div class="vector"></div></a></li><li> <a href="/contact">Connect<div class="vector"></div></a></li></ul></nav><div class="container"><header><h2 class="brand-title">Rory <br/> Duncan</h2><ul class="professional-titles description"> <li>Web Developer,</li><li>Software Engineer</li></ul></header><content><div class="work"><h1>Work History</h1><ul class="work-history"><li class="item" tab-index="0"><ul class="positions"><li class="position">Software Engineer</li></ul><div class="business-name">Work Truck Solutions</div><div class="location">Chico, CA</div><div class="description"><p>This is my current position.</p></div></li><li class="item" tab-index="0"><ul class="positions"><li class="position">Director of Project Development</li><li class="position">Fullstack Developer</li><li class="position">Author</li></ul><div class="business-name">Modern Developer, Inc.</div><div class="location">Rockwell, MD  <i>(Remote)</i></div><div class="description"><p>A developer training academy in which I worked integratedly with the CEO to provide decisively meaningful direction and content, engineering company-wide solutions, and authoring materials for students.</p></div></li><li class="item" tab-index="0"><ul class="positions"><li class="position">Front End Developer</li><li class="position">Client Support</li></ul><div class="business-name">Steps Marketing</div><div class="location">Chico, CA</div><div class="description"><p>Developed static web sites from design documents and provided support, maintainence, and updates using HTML, C#, LESS, MVC, .NET, & javascript.</p></div></li><li class="item" tab-index="0"><ul class="positions"><li class="position">Junior Web Developer</li></ul><div class="business-name">Navigation North Learning Solutions</div><div class="location">Chico, CA</div><div class="description"><p>Worked with a small team developing a niche, data-driven, web application using technologies such as Bootstrap, Stylus, Backbone.js, Marionette.js, Laravel, and Redis.</p></div></li><li class="item" tab-index="0"><ul class="positions"><li class="position">Intern Web Developer</li></ul><div class="business-name">Primary Prevention Plus</div><div class="location">Chico, CA</div><div class="description"><p>My first internship, in which a professor noticed my aptitude for programming. Developed a basic user-centered website with Javascript, PHP, and mySQL.</p></div></li><li class="item" tab-index="0"><ul class="positions"><li class="position">Graphic and Media Designer</li></ul><div class="business-name">Freelancer</div><div class="location">Remote</div><div class="description"><p>I first gained an interest for technology via photography, and subsequently design. I mastered Photoshop early in highschool and would design banners, logos, and other visual content for bands and other interested individuals, finding clients via MySpace. Interestingly enough, I learned rudimentary HTML and CSS by requests for designing MySpace profiles. Aware of the limited capabilities of HTML and CSS—at the time—I perceived visual design the key to impactful experiences on the web.</p></div></li></ul><h2>Synopsis</h2><p>My experience with web development began with a focus on Javascript, due to it's foreseeable market growth. Resultingly, my preferred web stack is Node.js backend, with a state-driven UI framework for the front-end, when appropriate.</p><p>I usually kickstart my projects with firebase, and I prefer micro-service architectures over large, single-sourced architectures.</p><h2>Projects</h2><p>I house a variety of projects on <a href="https://github.com/RoryDuncan?tab=repositories" rel="noopener" target="_blank">GitHub</a>—including 
- <a href="https://github.com/RoryDuncan/Portfolio-2017" rel="noopener" target="_blank">the source of this portfolio</a>.</p></div></content></div><link href="https://fonts.googleapis.com/css?family=Work+Sans|Share+Tech+Mono" rel="stylesheet"/></body></html>
+ <a href="https://github.com/RoryDuncan/Portfolio-2017" rel="noopener" target="_blank">the source of this portfolio</a>.</p></div></content></div><link href="https://fonts.googleapis.com/css?family=Work+Sans|Average|Montserrat" rel="stylesheet"/></body></html>
