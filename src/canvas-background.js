@@ -27,9 +27,9 @@ const renderBlip = (x, y) => {
 };
 
 const renderBlipGroup = (x, y, color1, color2) => {
-  $.fillStyle = color1 || "#bbb";
+  $.fillStyle = color1 || "#161616";
   renderBlip(x, y);
-  $.fillStyle = color2 || "#d2d2d2";
+  $.fillStyle = color2 || "#222";
   /*if (Math.random() >= 0.75)*/ renderBlip(x - gridSize, y);
   /*if (Math.random() >= 0.75)*/ renderBlip(x + gridSize, y);
   /*if (Math.random() >= 0.75)*/ renderBlip(x, y + gridSize);
@@ -61,26 +61,6 @@ canvas.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 })
 
-let isWorkPage = (window.location.pathname.split("work").length > 1);
-let currentEffect = isWorkPage ? "blip-line" : "blip-grid";
-const pageEffects = {
-  
-  "blip-grid": (mouse) => {
-    renderBlipCluster(mouse.x, mouse.y);  
-  },
-  
-  "blip-line": (mouse) => {
-    var dir = Math.random() >= 0.51 ? 1 : -1;
-    var mods = new Array(20).fill(1).map((a, i) => gridSize * a * i * dir);
-      
-      $.fillStyle = "#e4e4e5";
-      
-      mods.forEach(a => renderBlip(mouse.x, mouse.y + a));
-    
-  },
-  
-}
-
 const changeBackgroundEffect = (effect) => {
   let test = pageEffects[effect];
   if (typeof test !== "undefined") {
@@ -88,20 +68,49 @@ const changeBackgroundEffect = (effect) => {
   }
 };
 
+const throttle = (delay, fn) => {
+  
+  let lastCalled = null;
+  
+  return (...args) => {
+    let now = Date.now();
+    if (lastCalled === null || lastCalled + delay >= now) {
+      lastCalled = now;
+      fn(...args)
+      console.log("bang!")
+    }
+  }
+  
+  
+}
 
 const debounce = (ms, fn) => {
   let timeoutID = null;
   
-  return () => {
+  return (...args) => {
     if (timeoutID != null) {
       window.clearTimeout(timeoutID);
     } 
     timeoutID = window.setTimeout(() => {
       timeoutID = null;
-      fn();
+      fn(...args);
     }, ms);
   }
 };
+
+let currentEffect = "blip-circle";
+const pageEffects = {
+  
+  "blip-grid": (mouse) => {
+    renderBlipCluster(mouse.x, mouse.y);  
+  },
+  
+  "blip-circle": throttle(250, (mouse) => {
+    console.log(mouse)
+  }),
+  
+}
+
 
 window.addEventListener("resize", debounce(250, () => {
   
