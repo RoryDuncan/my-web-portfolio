@@ -18,13 +18,6 @@ if (!useHref) {
       window.history.pushState(page, null, e.target.getAttribute("href"));
       changePageContentTo(page);
       
-      if (page == "/work") {
-        renderer.changeBackgroundEffect("blip-line");
-      }
-      else {
-        renderer.changeBackgroundEffect("blip-grid")
-      }
-      
       removeActiveNavClass();
       e.target.classList.add("active");
     }, false);
