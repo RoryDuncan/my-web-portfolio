@@ -220,7 +220,7 @@ const changePageContentTo = (pageHref) => {
     
     window.setTimeout(() => {
       content.classList.remove("animation--change-page");    
-    }, 400);
+    }, 300);
   }
   
 };
