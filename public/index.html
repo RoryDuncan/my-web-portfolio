@@ -1,7 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Introduction</title><script src="js/bundle.js?1521362038357" async="async"></script><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Introduction</title><script src="js/bundle.js?1521529332107" async="async"></script><style>
 html {
   font-size: 16px;
   line-height: 1.8rem;
+  
+  --desktop-background-color: #1b1b1b;
+  --desktop-container-color: transparent;
 }
 
 
@@ -10,9 +13,10 @@ body {
   --container-background-color: transparent;
   --body-color: #d3d2d2;
   --highlight-color: #bbb;
-  --link-color: #0d9;
+  --link-color: #f9dc3c;
   --heading-color: #777;
-  --selection-color: #884e55;
+  --selection-color: #000;
+  --selection-background-color: #fff;
   --container-size: 100%;
   --body-font: 'Work Sans';
   --accent-font: 'Average';
@@ -69,7 +73,7 @@ content a:hover {
 
 ::selection {
   color: var(--selection-color);
-  background: transparent;
+  background: var(--selection-background-color);
 }
 
 #bg-layer {
@@ -440,8 +444,8 @@ ul.connecting-means li a:hover {
   
   body {
     overflow-x: auto;
-    --body-background-color: #1b0000;
-    --container-background-color: #1b0000;
+    --body-background-color: var(--desktop-background-color);
+    --container-background-color: var(--desktop-container-color);
     --container-size: 50rem;
   }
   

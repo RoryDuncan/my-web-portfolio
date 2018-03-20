@@ -42,42 +42,41 @@ const gridSize = 10;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-
-
-const mouse = {
-  x: 0,
-  y: 0,
-};
-
-const renderBlip = (x, y) => {
-  let size = gridSize;
-  let halfSize = size / 2;
-  $.fillRect(x - halfSize, y - halfSize, halfSize, halfSize);
-};
-
-const renderBlipGroup = (x, y, color1, color2) => {
-  $.fillStyle = color1 || "#161616";
-  renderBlip(x, y);
-  $.fillStyle = color2 || "#222";
-  /*if (Math.random() >= 0.75)*/ renderBlip(x - gridSize, y);
-  /*if (Math.random() >= 0.75)*/ renderBlip(x + gridSize, y);
-  /*if (Math.random() >= 0.75)*/ renderBlip(x, y + gridSize);
-  /*if (Math.random() >= 0.75)*/ renderBlip(x, y - gridSize);
-};
-
-const renderBlipCluster = (x, y, color1, color2) => {
+const throttle = (delay, fn) => {
   
-  var modifiers = [4, 4, 4, 4].map(a => ~~(Math.random()*a));
-  var origins = modifiers.map((a, i) => { 
-    return {
-      x: x + (gridSize * a * (i == 0 || i == 3 ? -1 : 1)),
-      y: y + (gridSize * a * (i == 1 || i == 3 ? -1 : 1)),
+  let lastCalled = null;
+  
+  return (...args) => {
+    let now = Date.now();
+    if (lastCalled === null || now >= lastCalled + delay) {
+      lastCalled = now;
+      fn(...args);
+    }
+  }
+  
+};
+
+class Mouse {
+  
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.previous = {
+      x: 0,
+      y: 0,
     };
-  });
+    
+    this.setPrevious = throttle(500, this.setPrevious.bind(this));
+  }
   
-  origins.forEach(a => renderBlipGroup(a.x, a.y, color1, color2));
+  setPrevious() {
+    this.previous.x = this.x;
+    this.previous.y = this.y;
+  }
   
-};
+}
+
+const mouse = new Mouse();
 
 const normalizeMouse = (x, y) => {
   let _x = Math.round(x / gridSize) * gridSize;
@@ -90,28 +89,6 @@ canvas.addEventListener("contextmenu", (e) => {
   e.preventDefault();
 });
 
-const changeBackgroundEffect = (effect) => {
-  let test = pageEffects[effect];
-  if (typeof test !== "undefined") {
-    currentEffect = effect;    
-  }
-};
-
-const throttle = (delay, fn) => {
-  
-  let lastCalled = null;
-  
-  return (...args) => {
-    let now = Date.now();
-    if (lastCalled === null || lastCalled + delay >= now) {
-      lastCalled = now;
-      fn(...args);
-      console.log("bang!");
-    }
-  }
-  
-  
-};
 
 const debounce = (ms, fn) => {
   let timeoutID = null;
@@ -127,19 +104,43 @@ const debounce = (ms, fn) => {
   }
 };
 
-let currentEffect = "blip-circle";
-const pageEffects = {
+const offscreen = document.createElement("canvas");
+const factor = 100;
+offscreen.width = window.innerWidth / factor;
+offscreen.height = window.innerHeight / factor;
+let $offscreen = offscreen.getContext("2d");
+const backgroundColor = window.getComputedStyle(document.body, null).getPropertyValue("--body-background-color");
+
+const colors = ["#000b0b", "#1b0202", "#0b0b0b", "#1b1b1b", "#000"];
+let currentColor = colors[~~(Math.random() * colors.length)];
+
+const pixelationSpillEffect = (mouse) => {
   
-  "blip-grid": (mouse) => {
-    renderBlipCluster(mouse.x, mouse.y);  
-  },
+  let color = currentColor;
   
-  "blip-circle": throttle(250, (mouse) => {
-    console.log(mouse, undefined);
-  }),
+  let w = offscreen.width   = window.innerWidth / factor;
+  let h = offscreen.height  =  window.innerHeight / factor;
+  $offscreen = offscreen.getContext("2d");
   
+
+  $offscreen.fillStyle = backgroundColor;
+  $offscreen.fillRect(0, 0, w, h);
+  $offscreen.drawImage(canvas, 0, 0, w, h);
+  $offscreen.beginPath();
+  $offscreen.moveTo(mouse.previous.x / factor, mouse.previous.y / factor);
+  $offscreen.quadraticCurveTo(Math.random() * w / factor, Math.random() * h / factor, mouse.x / factor, mouse.y / factor);
+  $offscreen.strokeStyle = color;
+  $offscreen.stroke();
+  $offscreen.closePath();
+  $.imageSmoothingEnabled = false;
+
+  $.drawImage(offscreen, 0, 0, window.innerWidth, window.innerHeight);
+
 };
 
+document.querySelectorAll(".brand-title")[0].addEventListener("click", (e) => {
+  
+});
 
 window.addEventListener("resize", debounce(250, () => {
   
@@ -159,19 +160,24 @@ window.addEventListener("resize", debounce(250, () => {
   
 }));
 
-canvas.addEventListener("mousemove", (e) => {
-  
-  [mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
-  let effect = pageEffects[currentEffect];
-  effect.call(effect, mouse);
-
+const updateColor = throttle(1000, () => {
+  currentColor = colors[~~(Math.random() * colors.length)];
 });
 
-var renderer = {
-  canvas,
-  context: $,
-  changeBackgroundEffect,
+document.body.addEventListener("mousemove", (e) => {
+  mouse.setPrevious();
+  updateColor()
+  ;[mouse.x, mouse.y] = normalizeMouse(e.clientX, e.clientY);
+});
+
+
+
+const render = (t) => {
+  pixelationSpillEffect(mouse);
+  window.requestAnimationFrame(render);
 };
+
+window.requestAnimationFrame(render);
 
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
@@ -187,13 +193,6 @@ if (!useHref) {
       e.stopPropagation();
       window.history.pushState(page, null, e.target.getAttribute("href"));
       changePageContentTo(page);
-      
-      if (page == "/work") {
-        renderer.changeBackgroundEffect("blip-line");
-      }
-      else {
-        renderer.changeBackgroundEffect("blip-grid");
-      }
       
       removeActiveNavClass();
       e.target.classList.add("active");
