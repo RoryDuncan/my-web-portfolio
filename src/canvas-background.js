@@ -87,7 +87,7 @@ const pixelationSpillEffect = (mouse) => {
   
   let w = offscreen.width   = window.innerWidth / factor
   let h = offscreen.height  =  window.innerHeight / factor
-  $offscreen = offscreen.getContext("2d");
+  // $offscreen = offscreen.getContext("2d");
   
 
   $offscreen.fillStyle = backgroundColor
