@@ -179,8 +179,6 @@ const render = (t) => {
 
 window.requestAnimationFrame(render);
 
-console.log("hey?");
-
 let content = document.querySelectorAll("content")[0];
 let anchors = document.querySelectorAll("nav a");
 
