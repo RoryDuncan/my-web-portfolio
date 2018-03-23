@@ -49,12 +49,6 @@ const normalizeMouse = (x, y) => {
   return [+_x, +_y];
 };
 
-// prevent right clicking.
-canvas.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
-})
-
-
 const debounce = (ms, fn) => {
   let timeoutID = null;
   
