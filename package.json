@@ -1,7 +1,7 @@
 {
-  "name": "portfolio-2017",
+  "name": "my-portfolio",
   "version": "1.0.0",
-  "description": "My personal portfolio in 2017",
+  "description": "My personal portfolio",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RoryDuncan/Portfolio-2017.git"
+    "url": "git+https://github.com/RoryDuncan/my-web-portfolio.git"
   },
   "author": "Rory Duncan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RoryDuncan/Portfolio-2017/issues"
+    "url": "https://github.com/RoryDuncan/my-web-portfolio/issues"
   },
-  "homepage": "https://github.com/RoryDuncan/Portfolio-2017#readme",
+  "homepage": "https://github.com/RoryDuncan/my-web-portfolio#readme",
   "devDependencies": {
     "npm-run-all": "^4.1.1",
     "pug": "^2.0.0-rc.3",
