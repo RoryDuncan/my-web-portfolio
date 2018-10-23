@@ -11,15 +11,15 @@ html {
 body {
   --body-background-color: #161616;
   --container-background-color: transparent;
-  --body-color: #d3d2d2;
+  --body-color: #c38b79;
   --highlight-color: #bbb;
-  --link-color: #ffaf2d;
+  --link-color: #b54124;
   --heading-color: #777;
   --selection-color: #000;
   --selection-background-color: #fff;
   --container-size: 100%;
-  --body-font: 'Work Sans';
-  --accent-font: 'Average';
+  --body-font: 'Share Tech Mono';
+  --accent-font: 'Nova Square';
   
   overflow-x: hidden;
   font-family: var(--body-font), sans-serif;
