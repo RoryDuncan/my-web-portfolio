@@ -14,7 +14,6 @@
 		width: 100%;
     max-width: 40em;
 		padding: 2em;
-		border-top: 1px solid #b2b2b2;
 	}
 
 	@media screen and (min-width: 56em) {
