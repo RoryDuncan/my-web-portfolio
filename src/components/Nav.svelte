@@ -1,60 +1,118 @@
 <script>
-	export let segment;
+  export let segment;
 </script>
 
 <style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
+  nav {
+    border-bottom: 1px solid rgba(255, 62, 0, 0.1);
+    font-weight: 300;
+    padding: 0 1em;
+  }
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+  /* clearfix */
+  ul::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
 
-	li {
-		display: block;
-		float: left;
-	}
+  li {
+    display: block;
+    float: left;
+  }
 
-	.selected {
-		position: relative;
-		display: inline-block;
-	}
+  .connect-list {
+    white-space: nowrap;
+    overflow: scroll;
+  }
 
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
+  .connect-list a {
+    color: #aaa;
+    width: 10em;
+    display: inline-block;
+  }
 
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
+  .connect-list a:hover::after {
+    content: "↗";
+    font-size: 0.7em;
+    margin-left: 0.5rem;
+    color: #bbb;
+    display: inline-block;
+  }
+
+  .selected {
+    color: var(--primary-color);
+  }
+
+  a {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    display: block;
+    border-radius: 6px;
+  }
+
+  a:hover {
+    background-color: var(--accent-gray);
+  }
+
+  @media screen and (min-width: 56em) {
+    nav {
+      width: var(--sidebar-width);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      padding: 3em 0;
+      display: flex;
+      justify-content: space-between;
+      flex-flow: column nowrap;
+    }
+
+    li {
+      float: none;
+      display: block;
+    }
+  }
 </style>
 
 <nav>
-	<ul>
-		<li><a class:selected='{segment === undefined}' href='.'>home</a></li>
-		<li><a class:selected='{segment === "about"}' href='about'>about</a></li>
+  <ul>
+    <li>
+      <a class:selected={segment === undefined} href=".">intro</a>
+    </li>
+    <li>
+      <a class:selected={segment === 'projects'} href="projects">projects</a>
+    </li>
+    <li>
+      <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
+    </li>
+  </ul>
 
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class:selected='{segment === "blog"}' href='blog'>blog</a></li>
-	</ul>
+  <ul class="connect-list">
+    <li>
+      <a href="mailto:rory@meow.coffee" target="_blank">
+        email
+        <!-- rory@meow.coffee -->
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/RoryDuncan" target="_blank">
+        <!-- github.com/roryduncan -->
+        github
+      </a>
+    </li>
+    <li>
+      <a
+        href="https://www.linkedin.com/in/rory-duncan-53288b79"
+        target="_blank">
+        linkedin
+      </a>
+    </li>
+  </ul>
+
+
 </nav>

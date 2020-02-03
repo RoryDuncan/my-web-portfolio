@@ -1,9 +1,29 @@
+html {
+	--body-font:  Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	--heading-font: "Lora", var(--body-font);
+
+	--content-width: 46rem;
+	--sidebar-width: 16rem;
+	--sidebar-layout-breakpoint: calc(16rem + 40rem);
+
+	--primary-color: #6b8;
+	--accent-gray: #f8f8f8;
+}
+
+* {
+	box-sizing: border-box;
+}
+
 body {
 	margin: 0;
-	font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	font-family:var(--body-font);
 	font-size: 14px;
 	line-height: 1.5;
-	color: #333;
+	color: #222b2b;
+}
+
+h1, h2 {
+	font-family: var(--heading-font);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,7 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 2em;
+	font-size: 3em;
 }
 
 a {

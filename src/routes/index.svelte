@@ -1,41 +1,15 @@
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>index.meow.coffee</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<h1>Introduction</h1>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<p>My name is Rory Duncan and I'm a Software Engineer living in Portland, OR.</p>
+
+<p>I have an interest in entrepreneurship, psychology, and software, and how they can make people's lives better.</p>
+
+<p>My aim is to always be communicative, transparent, and mindful.</p>
