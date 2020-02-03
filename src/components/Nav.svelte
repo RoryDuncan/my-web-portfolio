@@ -1,16 +1,20 @@
 <script>
+  import SocialLinks from "./SocialLinks.svelte";
   export let segment;
 </script>
 
 <style>
   nav {
     font-weight: 300;
-    padding: 0 1em;
+    padding: 0.5em 1em;
   }
 
   ul {
+    list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-evenly;
   }
 
   /* clearfix */
@@ -25,23 +29,9 @@
     float: left;
   }
 
-  .connect-list {
-    white-space: nowrap;
-    overflow: scroll;
-  }
 
-  .connect-list a {
-    color: #aaa;
-    width: 10em;
-    display: inline-block;
-  }
-
-  .connect-list a:hover::after {
-    content: "↗";
-    font-size: 0.7em;
-    margin-left: 0.5rem;
-    color: #bbb;
-    display: inline-block;
+  .non-mobile {
+    display: none;
   }
 
   .selected {
@@ -71,8 +61,20 @@
       flex-flow: column nowrap;
     }
 
+    ul {
+      display: block;
+    }
+
     li {
       float: none;
+      display: block;
+    }
+
+    .mobile-only {
+      display: none;
+    }
+
+    .non-mobile {
       display: block;
     }
   }
@@ -89,29 +91,15 @@
     <li>
       <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
     </li>
+    <li class="mobile-only">
+      <a rel="prefetch" class:selected={segment === 'links'} href="links">links</a>
+    </li>
   </ul>
 
-  <ul class="connect-list">
-    <li>
-      <a href="mailto:rory@meow.coffee" target="_blank">
-        email
-        <!-- rory@meow.coffee -->
-      </a>
-    </li>
-    <li>
-      <a href="https://github.com/RoryDuncan" target="_blank">
-        <!-- github.com/roryduncan -->
-        github
-      </a>
-    </li>
-    <li>
-      <a
-        href="https://www.linkedin.com/in/rory-duncan-53288b79"
-        target="_blank">
-        linkedin
-      </a>
-    </li>
-  </ul>
+  <div class="non-mobile">
+    <SocialLinks />
+  </div>
+
 
 
 </nav>

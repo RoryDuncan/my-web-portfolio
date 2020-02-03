@@ -1,5 +1,7 @@
 <style>
-
+	.strong {
+		font-weight: 600;
+	}
 </style>
 
 <svelte:head>
@@ -13,3 +15,5 @@
 <p>I have an interest in entrepreneurship, psychology, and software, and how they can make people's lives better.</p>
 
 <p>My aim is to always be communicative, transparent, and mindful.</p>
+
+<p class="strong">Let's build something awesome.</p>

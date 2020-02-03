@@ -1,5 +1,5 @@
 html {
-	--body-font:  Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	--body-font:  "Lato", Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 	--heading-font: "Lora", var(--body-font);
 
 	--content-width: 46rem;
