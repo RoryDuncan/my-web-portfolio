@@ -12,7 +12,6 @@
 
   main {
 		width: 100%;
-    max-width: 40em;
 		padding: 2em;
 	}
 
@@ -21,6 +20,8 @@
 			display: flex;
 			justify-content: space-evenly;
 			flex: 0 1 auto;
+			max-width: 45em;
+			margin: 0 auto;
 		}
 
 		main {
