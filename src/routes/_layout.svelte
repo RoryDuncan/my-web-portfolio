@@ -18,15 +18,15 @@
 	@media screen and (min-width: 56em) {
 		.container {
 			display: flex;
-			justify-content: space-evenly;
+			justify-content: space-between;
 			flex: 0 1 auto;
-			max-width: 45em;
-			margin: 0 auto;
 		}
 
 		main {
 			max-width: var(--content-width);
 			border-top: none;
+			padding: 10vh 0;
+			margin: 0 auto;
 		}
 	}
 

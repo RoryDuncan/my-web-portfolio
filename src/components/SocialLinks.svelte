@@ -62,7 +62,7 @@
       on:mouseover="{() => showInstagramMessage = true}"
       on:mouseout="{() => showInstagramMessage = false}"
       >
-      {showInstagramMessage ? "mostly cat pictures" : showFullLink ? instagram : "instagram"}
+      {showInstagramMessage ? "AKA cat diary" : showFullLink ? instagram : "instagram"}
     </a>
   </li>
 </ul>

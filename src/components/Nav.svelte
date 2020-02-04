@@ -53,9 +53,9 @@
     nav {
       width: var(--sidebar-width);
       height: 100vh;
+      padding: 10vh 1rem;
       position: sticky;
       top: 0;
-      padding: 3em 0;
       display: flex;
       justify-content: space-between;
       flex-flow: column nowrap;
