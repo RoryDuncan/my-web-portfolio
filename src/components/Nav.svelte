@@ -83,13 +83,13 @@
 <nav>
   <ul>
     <li>
-      <a class:selected={segment === undefined} href=".">intro</a>
+      <a rel="prefetch" class:selected={segment === undefined} href=".">intro</a>
     </li>
     <li>
-      <a class:selected={segment === 'projects'} href="projects">projects</a>
+      <a rel="prefetch" class:selected={segment === 'about'} href="about">about</a>
     </li>
     <li>
-      <a rel="prefetch" class:selected={segment === 'blog'} href="blog">blog</a>
+      <a rel="prefetch" class:selected={segment === 'projects'} href="projects">projects</a>
     </li>
     <li class="mobile-only">
       <a rel="prefetch" class:selected={segment === 'links'} href="links">links</a>
