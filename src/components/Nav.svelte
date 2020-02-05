@@ -43,6 +43,7 @@
     padding: 0.5em 1em;
     display: block;
     border-radius: 6px;
+    margin-bottom: 0.5em;
   }
 
   a:hover {
