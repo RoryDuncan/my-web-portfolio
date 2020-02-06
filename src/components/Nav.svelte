@@ -15,6 +15,8 @@
     padding: 0;
     display: flex;
     justify-content: space-evenly;
+    flex: 1 0 auto;
+    flex-wrap: wrap;
   }
 
   li {
