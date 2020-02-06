@@ -25,7 +25,7 @@ export default {
 			svelte({
 				dev,
 				hydratable: true,
-				emitCss: true
+				emitCss: false
 			}),
 			resolve({
 				browser: true,
