@@ -3,7 +3,10 @@
 </script>
 
 <svelte:head>
-	<title>links.meow.coffee</title>
+  <title>links.meow.coffee</title>
+  <meta
+    name="description"
+    content="A list of other websites you can find Rory." />
 </svelte:head>
 
 <h1>Links</h1>

@@ -1,5 +1,6 @@
 <svelte:head>
   <title>about.meow.coffee</title>
+  <meta name="description" content="Learn about Rory and some of his interests." />
 </svelte:head>
 
 <h1>About Me</h1>
