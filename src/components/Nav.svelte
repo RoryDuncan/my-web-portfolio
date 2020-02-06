@@ -17,16 +17,8 @@
     justify-content: space-evenly;
   }
 
-  /* clearfix */
-  ul::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-
   li {
     display: block;
-    float: left;
   }
 
 
@@ -63,11 +55,6 @@
     }
 
     ul {
-      display: block;
-    }
-
-    li {
-      float: none;
       display: block;
     }
 
