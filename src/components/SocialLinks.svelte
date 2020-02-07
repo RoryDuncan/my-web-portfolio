@@ -33,6 +33,7 @@
   .external-link-icon::after {
     content: "↗";
     font-size: 0.7em;
+    line-height: 1em;
     margin-left: 0.5rem;
     color: #bbb;
     display: inline-block;
