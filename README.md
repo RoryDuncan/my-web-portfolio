@@ -1,12 +1,12 @@
 # my-web-portfolio
 
-My personal portfolio.
+My personal portfolio. See [meow.coffee](https://meow.coffee)
 
-### Technical Details
+## Details
 
-My portfolio has a few interesting facets:
+- Built using [svelte/sapper](https://sapper.svelte.dev/)
+- Statically exported and hosted on Firebase Hosting
 
-- 100/100 mobile and desktop score via [Google's Pagespeed Insights](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fmeow.coffee&tab=mobile)
-- Less than 30kb total size. 7.2kb core size -- with roughly 22kb loaded via google web fonts.
-- No additional JS or CSS dependencies (aside from Google Web Fonts above).
+## Previous
 
+You can see the 2018 variant of `my-web-portfolio` at [previous.meow.coffee](https://previous.meow.coffee).
