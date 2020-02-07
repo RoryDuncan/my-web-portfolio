@@ -7,7 +7,7 @@
 <style>
 
 	.container {
-
+		display: block;
 	}
 
   main {
