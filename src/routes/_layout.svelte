@@ -6,29 +6,29 @@
 
 <style>
 
-	.container {
-		display: block;
-	}
+  .container {
+    display: block;
+  }
 
   main {
-		width: 100%;
-		padding: 2em;
-	}
+    width: 100%;
+    padding: 2em;
+  }
 
-	@media screen and (min-width: 56em) {
-		.container {
-			display: flex;
-			justify-content: space-between;
-			flex: 0 1 auto;
-		}
+  @media screen and (min-width: 56em) {
+    .container {
+      display: flex;
+      justify-content: space-between;
+      flex: 0 1 auto;
+    }
 
-		main {
-			max-width: var(--content-width);
-			border-top: none;
-			padding: 10vh 0;
-			margin: 0 auto;
-		}
-	}
+    main {
+      max-width: var(--content-width);
+      border-top: none;
+      padding: 10vh 0;
+      margin: 0 auto;
+    }
+  }
 
 </style>
 
