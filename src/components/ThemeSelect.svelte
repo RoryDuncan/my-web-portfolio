@@ -13,7 +13,7 @@
 
   function setTheme(value) {
     theme.set(value);
-    // themeSelectOpen = false;
+    themeSelectOpen = false;
   }
 
   onMount(async () => {
