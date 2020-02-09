@@ -11,11 +11,11 @@
   }
 
   a {
-    color: var(--primary-color);
+    color: var(--link-text-color);
     display: inline-block;
     padding: 0 0.25em;
     margin-left: -0.17em;
-    background-color: #fafafa;
+    background-color: var(--accent-gray);
     border-radius: 6px;
     text-decoration: none;
   }
@@ -43,7 +43,7 @@
     content: "↗";
     font-size: 0.7em;
     margin-left: 0.5rem;
-    color: #bbb;
+    color: var(--muted-color);
     display: inline-block;
   }
 </style>

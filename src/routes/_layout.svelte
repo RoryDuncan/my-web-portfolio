@@ -1,6 +1,6 @@
 <script>
   import Nav from "../components/Nav.svelte";
-  import ThemeProvider from "../components/ThemeProvider.svelte";
+  import ThemeSelect from "../components/ThemeSelect.svelte";
 
   export let segment;
 
@@ -34,7 +34,7 @@
 
 </style>
 
-<ThemeProvider>
+<ThemeSelect>
   <div class="container">
 
     <Nav {segment} />
@@ -42,4 +42,4 @@
       <slot />
     </main>
   </div>
-</ThemeProvider>
+</ThemeSelect>

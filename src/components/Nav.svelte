@@ -29,7 +29,7 @@
   }
 
   .selected {
-    color: var(--primary-color);
+    color: var(--selected-nav-color);
   }
 
   a {
