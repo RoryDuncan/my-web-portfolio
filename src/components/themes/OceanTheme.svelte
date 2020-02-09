@@ -1,5 +1,7 @@
 <script>
 
+  const cloudColor = "#EEECEC";
+
   import { onMount } from 'svelte';
 
   onMount(() => {
