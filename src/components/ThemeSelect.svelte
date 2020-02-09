@@ -3,16 +3,18 @@
   import { fade } from "svelte/transition";
   import ThemeProvider from "./ThemeProvider.svelte"
 
-  let theme = null;
+  export let theme = "none";
+  let themeStore = null;
   let THEMES = null;
+  let isLoaded = false;
 
   let themeSelectOpen = false;
-  let currentTheme = "none";
 
-  $: currentTheme = $theme ? $theme : currentTheme;
+
+  $: theme = themeStore !== null ? $themeStore : theme;
 
   function setTheme(value) {
-    theme.set(value);
+    themeStore.set(value);
     themeSelectOpen = false;
   }
 
@@ -20,6 +22,7 @@
     const module = await import("../stores/theme.js");
     theme = module.theme;
     THEMES = module.THEMES;
+    isLoaded = true;
   });
 </script>
 
@@ -92,7 +95,7 @@
 </style>
 
 
-<ThemeProvider theme={$theme} {THEMES} isLoaded={THEMES !== null}>
+<ThemeProvider {theme} {THEMES} {isLoaded} >
   <slot />
 </ThemeProvider>
 
@@ -107,7 +110,7 @@
         <li>
           <button
             type="button"
-            disabled={currentTheme === THEMES.none}
+            disabled={theme === THEMES.none}
             on:click={() => setTheme(THEMES.none)}>
             None
           </button>
@@ -115,7 +118,7 @@
         <li>
           <button
             type="button"
-            disabled={currentTheme === THEMES.ocean}
+            disabled={theme === THEMES.ocean}
             on:click={() => setTheme(THEMES.ocean)}>
             Ocean
           </button>
@@ -126,7 +129,7 @@
     </div>
   {:else}
     <button class="current-theme" type="button" on:click={() => (themeSelectOpen = true)}>
-      Theme: {currentTheme}
+      Theme: {theme}
     </button>
   {/if}
 </footer>
