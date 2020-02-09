@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import ThemeProvider from "./ThemeProvider.svelte"
 
   export let theme = "none";
@@ -20,7 +20,7 @@
 
   onMount(async () => {
     const module = await import("../stores/theme.js");
-    theme = module.theme;
+    themeStore = module.theme;
     THEMES = module.THEMES;
     isLoaded = true;
   });
@@ -104,7 +104,7 @@
     <div
       class="theme-select-backdrop"
       on:click={() => (themeSelectOpen = false)} transition:fade={{ delay: 100, duration: 300 }} />
-    <div class="theme-select" transition:fade={{ duration: 200 }}>
+    <div class="theme-select" transition:fly={{ y: 300, duration: 300 }}>
       <h2>Theme Select</h2>
       <ul class="themes">
         <li>
