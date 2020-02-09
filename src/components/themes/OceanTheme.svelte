@@ -1,16 +1,20 @@
 <script>
 
-  const cloudColor = "#EEECEC";
+  let canvas = null;
 
   import { onMount } from 'svelte';
 
   onMount(() => {
     window.document.body.classList.add("theme--ocean")
-    return () => window.document.body.classList.remove("theme--ocean");
+    const context = canvas.getContext("2d");
+
+    return () => {
+      window.document.body.classList.remove("theme--ocean");
+    };
   });
 </script>
 
-
+<canvas bind:this={canvas}></canvas>
 <slot />
 
 <style>
