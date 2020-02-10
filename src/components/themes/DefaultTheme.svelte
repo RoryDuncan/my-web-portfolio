@@ -11,6 +11,7 @@
     --accent-gray: #f8f8f8;
     --selected-nav-color: var(--primary-color);
     --muted-text: #bbb;
+    --secondary-text-color: #666;
   }
 
 </style>
