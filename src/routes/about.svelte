@@ -54,7 +54,7 @@
 
 <style>
   a {
-    color: var(--primary-color);
+    color: var(--link-text-color);
     text-decoration: none;
   }
 
