@@ -26,14 +26,14 @@
   $: isFarLayer = img.height <= 300;
   $: layer = isFarLayer ? -1 : 1;
   $: scale = isFarLayer ? 0.75 : 0.5;
-  $: top = img.height * -1;
+  $: top = img.height * -1 * scale;
   $: running ? start() : null;
   $: style = `top: ${top}px; transform: translate(${x}px, ${$y}px) scale(${scale}) rotate(${rotation}deg);`;
 
 
   function start() {
     setX();
-    y.set(0, { duration: 0, delay: 0});
+    y.set(0, { duration: 0, delay: 0, });
 
     const baseDuration = 80000;
     duration = Math.round(baseDuration + Math.random() * (baseDuration / 4));
@@ -55,6 +55,7 @@
   }
 
   function reset() {
+    delay = 0;
     start();
   }
 
@@ -88,6 +89,7 @@
     mix-blend-mode: hard-light;
     user-select: none;
     pointer-events: none;
+    transform-origin: center top;
   }
 
   .far {

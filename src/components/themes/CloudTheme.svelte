@@ -1,11 +1,9 @@
 <script>
 
-  import { start, stop } from "../../animations/clouds/sea-animation.js";
   import { loadImages } from "../../animations/clouds/cloud-loader.js";
   import { onMount } from 'svelte';
   import Cloud from "../Cloud.svelte";
 
-  let canvas = null;
   let imagesLoaded = false;
   let cloudDensity = 2;
   let images = [];
@@ -19,26 +17,14 @@
     height = window.innerHeight;
 
     window.document.body.classList.add("theme--ocean");
-
-
-    maximizeCanvas();
-    const context = canvas.getContext("2d");
-    start(context);
-
     loadClouds();
 
     return () => {
       imagesLoaded = false;
-      stop();
       window.document.body.classList.remove("theme--ocean");
     };
   });
 
-  function maximizeCanvas() {
-    canvas.width = width;
-    canvas.height = height;
-
-  }
 
   async function loadClouds() {
     images = await loadImages();
@@ -65,7 +51,6 @@
 {/if}
 
 
-<canvas bind:this={canvas}></canvas>
 <slot />
 
 <style>
@@ -79,19 +64,6 @@
     --secondary-text-color: var(--text-color);
     --selected-nav-color: var(--primary-color);
   }
-
-  canvas {
-    margin: 0 0;
-    padding: 0 0;
-    display: block;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    z-index: -1;
-  }
-
 
   .loading-clouds {
     position: fixed;
