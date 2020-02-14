@@ -5,7 +5,7 @@
   export let isLoaded = false; // should never be true for SSR
 
   import DefaultTheme from "./themes/DefaultTheme.svelte";
-  import OceanTheme from "./themes/OceanTheme.svelte";
+  import CloudTheme from "./themes/CloudTheme.svelte";
 
 </script>
 
@@ -14,10 +14,10 @@
     <slot />
   </DefaultTheme>
 {:else}
-  {#if theme === THEMES.ocean}
-    <OceanTheme>
+  {#if theme === THEMES.clouds}
+    <CloudTheme>
       <slot />
-    </OceanTheme>
+    </CloudTheme>
   {:else }
     <DefaultTheme>
       <slot />

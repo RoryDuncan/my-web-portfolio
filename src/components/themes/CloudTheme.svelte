@@ -1,6 +1,6 @@
 <script>
 
-  import { start, stop } from "../../animations/clouds/cloud-animation.js";
+  import { start, stop } from "../../animations/clouds/sea-animation.js";
   import { loadImages } from "../../animations/clouds/cloud-loader.js";
   import { onMount } from 'svelte';
   import Cloud from "../Cloud.svelte";
@@ -57,7 +57,7 @@
 {#if imagesLoaded}
   <div class="clouds">
     {#each images as img, i}
-      <Cloud {img} {height} {width} running={true} delay={i * 5000} />
+      <Cloud {img} {height} {width} running={true} delay={i * 8000} />
     {/each}
   </div>
 {:else}

@@ -33,29 +33,28 @@
 
   function start() {
     setX();
-    const baseDuration = 60000;
+    y.set(0, { duration: 0, delay: 0});
+
+    const baseDuration = 80000;
     duration = Math.round(baseDuration + Math.random() * (baseDuration / 4));
 
     if (isFarLayer) {
-      duration *= 1.25;
+      duration *= 2;
     }
 
     const rotationRange = 3;
     rotation = Math.round((Math.random() * (rotationRange * 2)) - rotationRange);
 
     const target = height + (img.height * 2 * scale)
-    // console.log({ x, top, target, delay, duration, height: img.height });
 
     y.set(target, { duration, delay, })
       .then(() => {
-        reset();
         dispatch(completeEvent, img);
+        reset();
       });
   }
 
   function reset() {
-    y.set(0, { duration: 0, delay: 0 }); // reset
-    delay = 0;
     start();
   }
 
@@ -64,9 +63,15 @@
     // we want clouds to spawn in bands ― averaging around 25% and 75% of the screen width
     const half = width / 2;
 
-    const base = Math.random() >= 0.5 ? -img.width : half + img.width;
+    const base = Math.random() >= 0.5 ? (img.width * scale * -0.5)  : half;
 
     x = base + Math.round(Math.random() * half) - (img.width / 2);
+    x = Math.min(width + 100, Math.max(-100, x));
+
+    if (x <= 200) {
+      isFarLayer = true;
+
+    }
 
   }
 
@@ -82,7 +87,6 @@
     opacity: 1;
     mix-blend-mode: hard-light;
     user-select: none;
-
   }
 
   .far {

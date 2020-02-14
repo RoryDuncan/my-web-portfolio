@@ -23,6 +23,14 @@
     themeStore = module.theme;
     THEMES = module.THEMES;
     isLoaded = true;
+
+    const params = new URLSearchParams(window.location.search)
+    if (params.has("theme")) {
+      const paramTheme = THEMES[params.get("theme")] || null;
+      if (paramTheme !== null) {
+        setTheme(paramTheme);
+      }
+    }
   });
 </script>
 
@@ -31,7 +39,7 @@
   .theme-changer {
     position: fixed;
     bottom: 0.5em;
-    background-color: var(--background-color);
+    background-color: transparent;
     right: 1em;
   }
 
@@ -118,9 +126,9 @@
         <li>
           <button
             type="button"
-            disabled={theme === THEMES.ocean}
-            on:click={() => setTheme(THEMES.ocean)}>
-            Ocean
+            disabled={theme === THEMES.clouds}
+            on:click={() => setTheme(THEMES.clouds)}>
+            Clouds
           </button>
         </li>
         <li />
