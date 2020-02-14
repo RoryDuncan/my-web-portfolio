@@ -84,7 +84,6 @@
     margin: 0 0;
     padding: 0 0;
     display: block;
-    outline: 1px solid #0f0;
     position: absolute;
     left: 0;
     right: 0;

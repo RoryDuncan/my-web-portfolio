@@ -87,6 +87,7 @@
     opacity: 1;
     mix-blend-mode: hard-light;
     user-select: none;
+    pointer-events: none;
   }
 
   .far {
