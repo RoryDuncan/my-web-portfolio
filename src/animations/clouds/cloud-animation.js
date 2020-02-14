@@ -1,36 +1,54 @@
-import { tweened } from 'svelte/motion';
 
 let $ = null;
 let rafID = null;
 
+
 /** Begins the animation loop
  *
  */
-function start(context) {
+export async function start(context, width, height) {
   $ = context;
+
+  // rafID = requestAnimationFrame(tick);
 }
-
-/**
- *
- */
-function tick(time) {
-
-  rafID = requestAnimationFrame(tick);
-}
-
-/**
- *
- */
-function step() {}
-
-/**
- *
- */
-function render() {}
 
 /** Ends the animation loop
  *
  */
-function stop() {
+export function stop() {
+  if (rafID !== null) {
+
+    clouds.forEach( cloud => cloud.unsubscribe());
+    cancelAnimationFrame(rafID);
+    rafID = null;
+
+  }
+}
+
+/**
+ *
+ */
+let lastTick = 0;
+function tick(time) {
+  const delta = time - lastTick;
+  step(delta);
+  if (delta >= 16) {
+    render(delta);
+    rafID = requestAnimationFrame(tick);
+  }
+
+}
+
+/**
+ *
+ */
+function step(delta) {
+
+}
+
+/**
+ *
+ */
+function render(delta) {
 
 }
