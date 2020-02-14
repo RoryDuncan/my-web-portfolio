@@ -37,10 +37,17 @@
 <style>
 
   .theme-changer {
+    display: none;
     position: fixed;
     bottom: 0.5em;
     background-color: transparent;
     right: 1em;
+  }
+
+  @media (min-width: 1024px) {
+    .theme-changer {
+      display: block;
+    }
   }
 
   .current-theme {
