@@ -37,7 +37,7 @@
     duration = Math.round(baseDuration + Math.random() * (baseDuration / 4));
 
     if (isFarLayer) {
-      duration *= 0.5;
+      duration *= 1.25;
     }
 
     const rotationRange = 3;
