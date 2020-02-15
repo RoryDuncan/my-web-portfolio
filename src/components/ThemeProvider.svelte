@@ -1,15 +1,28 @@
 <script>
 
+  let isLoaded = false;
+
   export let theme = null;
   export let THEMES = null;
-  export let isLoaded = false; // should never be true for SSR
+  export let isMounted = false; // should never be true for SSR
+
+  $: if (isMounted) loadThemes();
 
   import DefaultTheme from "./themes/DefaultTheme.svelte";
-  import CloudTheme from "./themes/CloudTheme.svelte";
+
+  // dynamically imported components
+  let CloudTheme;
+
+
+  async function loadThemes() {
+    CloudTheme = await import("./themes/CloudTheme.svelte").default;
+    isLoaded = true;
+  }
+
 
 </script>
 
-{#if !isLoaded}
+{#if !isMounted || !isLoaded}
   <DefaultTheme>
     <slot />
   </DefaultTheme>

@@ -110,7 +110,7 @@
 </style>
 
 
-<ThemeProvider {theme} {THEMES} {isLoaded} >
+<ThemeProvider {theme} {THEMES} isMounted={isLoaded} >
   <slot />
 </ThemeProvider>
 
