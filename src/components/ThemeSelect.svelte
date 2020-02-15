@@ -6,9 +6,10 @@
   export let theme = "none";
   let themeStore = null;
   let THEMES = null;
-  let isLoaded = false;
+  let isMounted = false;
 
   let themeSelectOpen = false;
+  let shouldLoadThemes = false;
 
 
   $: theme = themeStore !== null ? $themeStore : theme;
@@ -22,7 +23,7 @@
     const module = await import("../stores/theme.js");
     themeStore = module.theme;
     THEMES = module.THEMES;
-    isLoaded = true;
+    isMounted = true;
 
     const params = new URLSearchParams(window.location.search)
     if (params.has("theme")) {
@@ -110,7 +111,7 @@
 </style>
 
 
-<ThemeProvider {theme} {THEMES} isMounted={isLoaded} >
+<ThemeProvider {theme} {THEMES} isMounted={isMounted && shouldLoadThemes} >
   <slot />
 </ThemeProvider>
 
@@ -143,7 +144,7 @@
 
     </div>
   {:else}
-    <button class="current-theme" type="button" on:click={() => (themeSelectOpen = true)}>
+    <button class="current-theme" type="button" on:click={() => themeSelectOpen = shouldLoadThemes = true} >
       Theme: {theme}
     </button>
   {/if}

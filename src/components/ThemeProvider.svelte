@@ -13,9 +13,10 @@
   // dynamically imported components
   let CloudTheme;
 
-
+  // we don't load until anything is mounted
   async function loadThemes() {
-    CloudTheme = await import("./themes/CloudTheme.svelte").default;
+    const module = await import("./themes/CloudTheme.svelte");
+    CloudTheme = module.default;
     isLoaded = true;
   }
 
