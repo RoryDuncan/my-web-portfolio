@@ -1,6 +1,6 @@
 <script>
 
-  import { loadImages } from "../../animations/clouds/cloud-loader.js";
+  import { loadImages } from "../../animations/cloud-loader.js";
   import { onMount } from 'svelte';
   import Cloud from "../Cloud.svelte";
 
