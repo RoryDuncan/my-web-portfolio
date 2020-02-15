@@ -12,11 +12,16 @@
 
   // dynamically imported components
   let CloudTheme;
+  let PixelTheme;
 
   // we don't load until anything is mounted
   async function loadThemes() {
-    const module = await import("./themes/CloudTheme.svelte");
+    let module = await import("./themes/CloudTheme.svelte");
     CloudTheme = module.default;
+
+    module = await import("./themes/PixelTheme.svelte");
+    PixelTheme = module.default;
+
     isLoaded = true;
   }
 
@@ -32,6 +37,10 @@
     <CloudTheme>
       <slot />
     </CloudTheme>
+  {:else if theme === THEMES.pixel}
+    <PixelTheme>
+      <slot />
+    </PixelTheme>
   {:else }
     <DefaultTheme>
       <slot />

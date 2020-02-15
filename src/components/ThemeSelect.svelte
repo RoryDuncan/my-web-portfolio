@@ -139,7 +139,14 @@
             Clouds
           </button>
         </li>
-        <li />
+        <li>
+          <button
+            type="button"
+            disabled={theme === THEMES.pixel}
+            on:click={() => setTheme(THEMES.pixel)}>
+            Pixels
+          </button>
+        </li>
       </ul>
 
     </div>
