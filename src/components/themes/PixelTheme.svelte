@@ -45,6 +45,6 @@
     bottom: 0;
     top: 0;
     z-index: -1;
-    background-color: var(--background-color);
+    background-color: transparent;
   }
 </style>
