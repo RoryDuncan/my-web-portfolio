@@ -4,7 +4,7 @@
 
   export let theme = null;
   export let THEMES = null;
-  export let isMounted = false; // should never be true for SSR
+  export let isMounted = false; // whether the parent component has been mounted
 
   $: if (isMounted) loadThemes();
 
