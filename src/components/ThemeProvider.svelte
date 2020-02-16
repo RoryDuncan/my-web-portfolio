@@ -37,7 +37,7 @@
     <CloudTheme>
       <slot />
     </CloudTheme>
-  {:else if theme === THEMES.pixel}
+  {:else if theme === THEMES.pixels}
     <PixelTheme>
       <slot />
     </PixelTheme>

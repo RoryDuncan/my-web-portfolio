@@ -142,8 +142,8 @@
         <li>
           <button
             type="button"
-            disabled={theme === THEMES.pixel}
-            on:click={() => setTheme(THEMES.pixel)}>
+            disabled={theme === THEMES.pixels}
+            on:click={() => setTheme(THEMES.pixels)}>
             Pixels
           </button>
         </li>

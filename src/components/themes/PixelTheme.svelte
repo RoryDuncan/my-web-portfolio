@@ -1,6 +1,6 @@
 <script>
 
-  // import { loadImages } from "../../animations/cloud-loader.js";
+  import { start, stop } from "../../animations/pixel-spill.js";
   import { onMount } from 'svelte';
 
   let canvas = null;
@@ -9,13 +9,15 @@
 
   onMount(() => {
 
-    width = window.innerWidth;
-    height = window.innerHeight;
+    canvas.width = width = window.innerWidth;
+    canvas.height = height = window.innerHeight;
 
     window.document.body.classList.add("theme--pixels");
+    start(canvas, width, height);
 
     return () => {
       window.document.body.classList.remove("theme--pixels");
+      stop();
     };
   });
 
