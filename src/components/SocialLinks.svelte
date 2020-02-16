@@ -19,7 +19,7 @@
   }
 
   a {
-    color: #666;
+    color: var(--secondary-text-color);
     text-decoration: none;
     display: inline-block;
     padding: 0.5em 1em;
@@ -35,7 +35,7 @@
     font-size: 0.7em;
     line-height: 1em;
     margin-left: 0.5rem;
-    color: #bbb;
+    color: var(--muted-text);
     display: inline-block;
   }
 
