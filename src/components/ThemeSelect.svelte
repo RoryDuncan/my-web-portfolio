@@ -29,6 +29,7 @@
     if (params.has("theme")) {
       const paramTheme = THEMES[params.get("theme")] || null;
       if (paramTheme !== null) {
+        shouldLoadThemes = true;
         setTheme(paramTheme);
       }
     }
