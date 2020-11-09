@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "rory-duncan-portfolio": {
+      "hosting": {
+        "staging": [
+          "meowcoffee"
+        ],
+        "production": [
+          "rory-duncan-portfolio"
+        ]
+      }
+    }
+  }
+}
