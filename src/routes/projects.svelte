@@ -76,7 +76,7 @@
       Built with Svelte/Sapper, nodejs, Electron, and Firebase.
       <a
         class="demo-link"
-        href="https://fuse-fonts-demo.firebaseapp.com/"
+        href="https://demo.fusefonts.com"
         {rel}
         {target}>
         See the demo
