@@ -28,6 +28,7 @@
 
 </script>
 
+<!-- svelte-ignore svelte(reactive-component) -->
 {#if !isMounted || !isLoaded}
   <DefaultTheme>
     <slot />

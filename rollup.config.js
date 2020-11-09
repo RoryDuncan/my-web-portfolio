@@ -14,7 +14,10 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+const onwarn = (warning, onwarn) =>
+	(warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
+	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) ||
+	onwarn(warning);
 
 export default {
   client: {
@@ -64,9 +67,11 @@ export default {
     ],
 
     onwarn,
+    preserveEntrySignatures: 'strict',
   },
 
   server: {
+
     input: config.server.input(),
     output: config.server.output(),
     plugins: [
@@ -88,6 +93,7 @@ export default {
     ),
 
     onwarn,
+    preserveEntrySignatures: 'strict',
   },
 
   serviceworker: {
