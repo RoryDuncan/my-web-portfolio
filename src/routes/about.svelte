@@ -16,7 +16,7 @@
 <ul>
   <li>
     <p>
-      I'm interested in third-wave coffee. When I travel I like to explore local
+      The coffee industry. When I travel I like to explore local, third-wave
       coffee shops and roasteries. I'm honing in on a great home pour-over.
     </p>
   </li>
@@ -46,7 +46,7 @@
   </li>
   <li>
     <p>
-      I spend way too much time actively looking for new music. I follow the post-punk and post-hardcore genres most actively, but I enjoy many others.
+      I enjoy finding new music. I follow the post-punk and post-hardcore genres most actively.
     </p>
   </li>
 </ul>
