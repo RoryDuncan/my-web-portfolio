@@ -2,7 +2,8 @@
   <title>index.meow.coffee</title>
   <meta
     name="description"
-    content="Rory Duncan is a Software Engineer living in Portland, OR." />
+    content="Rory Duncan is a Software Engineer living in Portland, OR."
+  />
 </svelte:head>
 
 <h1>Introduction</h1>

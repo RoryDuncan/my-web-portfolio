@@ -33,7 +33,7 @@
     --primary-color: #666;
     --background-color: #222;
     --text-color: #eee;
-    --link-text-color: #fff;
+    --link-text-color: #faa;
     --accent-gray: transparent;
     --secondary-text-color: var(--text-color);
     --selected-nav-color: var(--primary-color);
