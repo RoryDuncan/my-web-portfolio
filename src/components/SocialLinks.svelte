@@ -64,6 +64,8 @@
       href="https://www.{instagram}" class:external-link-icon={showFullLink} {target} {rel}
       on:mouseover="{() => showInstagramMessage = true}"
       on:mouseout="{() => showInstagramMessage = false}"
+      on:focus="{() => showInstagramMessage = true}"
+      on:blur="{() => showInstagramMessage = false}"
       >
       {showInstagramMessage ? "AKA cat diary" : showFullLink ? instagram : "instagram"}
     </a>
