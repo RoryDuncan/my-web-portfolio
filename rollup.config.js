@@ -25,12 +25,17 @@ export default {
     output: config.client.output(),
     plugins: [
       replace({
-        'process.browser': true,
-        'process.env.NODE_ENV': JSON.stringify(mode)
+        preventAssignment: true,
+        values: {
+          'process.browser': true,
+          'process.env.NODE_ENV': JSON.stringify(mode)
+        }
       }),
 
       svelte({
-        dev,
+        compilerOptions: {
+          dev,
+        },
         hydratable: true,
         emitCss: false
       }),
