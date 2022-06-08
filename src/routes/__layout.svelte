@@ -1,8 +1,10 @@
 <script>
   import Nav from "../components/Nav.svelte";
   import ThemeSelect from "../components/ThemeSelect.svelte";
+  import { getStores } from "$app/stores";
 
-  export let segment;
+  const page = getStores().page;
+  $: segment = $page.url.pathname ?? "/";
 
 </script>
 

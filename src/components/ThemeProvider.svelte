@@ -34,6 +34,7 @@
     <slot />
   </DefaultTheme>
 {:else}
+  <!-- svelte-ignore svelte(reactive-component) -->
   {#if theme === THEMES.clouds}
     <CloudTheme>
       <slot />

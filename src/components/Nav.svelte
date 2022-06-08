@@ -1,6 +1,6 @@
 <script>
   import SocialLinks from "./SocialLinks.svelte";
-  export let segment;
+  export let segment = "/";
 </script>
 
 <style>
@@ -73,16 +73,16 @@
 <nav>
   <ul>
     <li>
-      <a class:selected={segment === undefined} href=".">intro</a>
+      <a class:selected={segment === "/"} href=".">intro</a>
     </li>
     <li>
-      <a class:selected={segment === 'about'} href="about">about</a>
+      <a class:selected={segment === '/about'} href="/about">about</a>
     </li>
     <li>
-      <a class:selected={segment === 'projects'} href="projects">projects</a>
+      <a class:selected={segment === '/projects'} href="/projects">projects</a>
     </li>
     <li class="mobile-only">
-      <a class:selected={segment === 'links'} href="links">links</a>
+      <a class:selected={segment === '/links'} href="/links">links</a>
     </li>
   </ul>
 
