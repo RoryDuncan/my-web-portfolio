@@ -6,7 +6,8 @@
   <title>links.meow.coffee</title>
   <meta
     name="description"
-    content="A list of other websites you can find Rory." />
+    content="A list of other websites you can find Rory."
+  />
 </svelte:head>
 
 <h1>Links</h1>
