@@ -46,6 +46,9 @@
       similar aggressive genres most actively.
     </p>
   </li>
+  <li>
+    <p>Poetry and folklore stories—I started writing poems last year and am pushing myself to write more.</p>
+  </li>
 </ul>
 
 <style>
