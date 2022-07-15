@@ -32,6 +32,6 @@
     "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^5.3.1",
-    "svelte": "^3.48.0"
+    "svelte": "^3.49.0"
   }
 }
