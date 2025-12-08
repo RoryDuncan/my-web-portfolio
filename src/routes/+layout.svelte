@@ -1,6 +1,7 @@
 <script lang="ts">
   import "open-props/normalize.min.css";
   import "open-props/open-props.min.css";
+  import "$lib/app/app.css";
   import favicon from "$lib/assets/favicon.svg";
   import GoogleWebFonts from "$lib/app/components/GoogleWebFonts.svelte";
 

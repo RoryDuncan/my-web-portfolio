@@ -8,11 +8,19 @@
   let charRefs: Record<string, HTMLElement | undefined> = $state({});
 
   const nameChars = $derived(data.hero.name.split(""));
+  let elementsToHighlight: Set<HTMLElement> = $state(new Set());
 
   let running = $state(true);
   let rafId: number | null = null;
+  let animationStarted = $state(false);
   let lastRender = $state(0);
   const delay = 5000;
+  const wait = (duration: number) =>
+    new Promise((resolve) => {
+      if (window) {
+        window.setTimeout(resolve, duration);
+      }
+    });
 
   function swapChars() {
     const keys = Object.keys(charRefs);
@@ -39,28 +47,13 @@
     }
   }
 
-  function render(runTime: DOMHighResTimeStamp) {
-    const delta = runTime - lastRender;
-
-    if (delta > 100) {
-      swapChars();
-      lastRender = runTime;
-    }
-
-    if (running) {
-      rafId = window.requestAnimationFrame(render);
-    } else if (rafId !== null) {
-      window.cancelAnimationFrame(rafId);
-    }
-  }
-
-  function onMouseEnter(index: number, char: string) {
+  async function onMouseEnter(index: number, char: string) {
     const gridWidth = 16;
     const col = index % gridWidth;
     const row = Math.floor(index / gridWidth);
     const totalChars = Object.keys(charRefs).length;
 
-    const elementsToHighlight = new Set<HTMLElement>();
+    elementsToHighlight = new Set();
 
     // Get column elements
     for (let i = col; i < totalChars; i += gridWidth) {
@@ -81,10 +74,8 @@
 
     // Example of what you can do with the elements:
     elementsToHighlight.forEach((el) => {
-      window.requestAnimationFrame(() => {
-        el.innerText = data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
-        el.style.opacity = "0.5";
-      });
+      el.innerText = char; //data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
+      // el.style.opacity = "0.5";
       // You can change their style, text, etc.
       // For example, let's change their text to a random character
       //   el.innerText = String.fromCharCode(100 + Math.floor(Math.random() * 26));
@@ -92,32 +83,27 @@
     });
   }
 
-  function onMouseLeave(index: number) {
+  function onMouseLeave() {
     Object.values(charRefs).forEach((el) => {
       if (el instanceof HTMLElement) {
         el.innerText = el.dataset.char ?? "/";
-        el.style.opacity = "0.1";
       }
     });
   }
-
-  $effect(() => {
-    window.setTimeout(() => {
-      lastRender = performance.now();
-      window.requestAnimationFrame(render);
-    }, delay);
-  });
 </script>
 
 {#snippet render_char(parts: string[], indexStart: number)}
   {#each parts as char, i}
     {@const roll = Math.random()}
+    {@const index = indexStart + i}
     <i
       role="region"
       data-char={char}
-      onmouseenter={() => onMouseEnter(indexStart + i, char)}
-      onmouseleave={() => onMouseLeave(indexStart + i)}
-      bind:this={charRefs[`${indexStart + i}`]}
+      class:dimmed={true}
+      onmouseenter={() => onMouseEnter(index, char)}
+      onmouseleave={onMouseLeave}
+      bind:this={charRefs[`${index}`]}
+      class:highlighted={elementsToHighlight.has(charRefs[index]!)}
       class="char"
       class:accent-1={roll >= 0.7}
       class:accent-2={roll >= 0.2 && roll < 0.6}
@@ -126,12 +112,16 @@
   {/each}
 {/snippet}
 
-<div class="character-grid noto-sans-mono-400">
+<div class="character-grid space-mono-regular" role="region" onmouseleave={onMouseLeave}>
   {@render render_char(data.hero.part1, 0)}
 
-  <h1 class="char-set noto-sans-mono-400 text-uppercase">
-    {#each nameChars as char}
-      <i class="char">{char}</i>
+  <h1 class="char-set space-mono-regular text-lowercase">
+    {#each nameChars as char, i}
+      <i
+        role="region"
+        class="char"
+        onmouseenter={() => onMouseEnter(data.hero.part1.length + i, char)}>{char}</i
+      >
     {/each}
   </h1>
 
@@ -139,9 +129,11 @@
 </div>
 
 <div class="page-content">
-  <p class="noto-sans-400">
-    Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation
-  </p>
+  <h2>Hi</h2>
+
+  <p>I'm rory. <br />I'm a specialized software engineer.</p>
+
+  <p></p>
 </div>
 
 <style>
@@ -166,7 +158,7 @@
   .page-content {
     padding: 2rem;
     background-color: var(--surface-1);
-    border-top: 1px solid var(--pink-6);
+    border-top: 3px solid var(--text-2);
     z-index: 2;
     position: relative;
     min-height: 50vh;
@@ -180,37 +172,39 @@
     transition: 0.2s ease-in-out transform;
   }
 
-  :where(:not(.char-set)) .char:hover {
-    /* todo */
-    /* transform: rotate(30deg); */
-  }
-
   .char-set {
     display: contents;
-    opacity: 0;
   }
 
   .char-set .char {
-    opacity: 0;
-    font-size: 2.5vw;
-    animation: 4s appear ease-in 0s;
+    font-size: max(4vw, 2rem);
+    animation: 1s appear ease-in 0s;
     animation-fill-mode: forwards;
-    color: var(--choco-3);
+    color: var(--brand);
   }
 
   .char {
     color: var(--stone-2);
+    transition: 0.5s ease-in-out opacity;
+  }
+
+  .dimmed {
+    opacity: 0.1;
+  }
+
+  .char.highlighted {
+    opacity: 0.5;
   }
 
   .accent-1 {
-    color: var(--pink-4);
+    color: var(--accent-color-1, --pink-4);
   }
 
   .accent-2 {
-    color: var(--text-2);
+    color: var(--accent-color-2, --text-2);
   }
   .accent-3 {
-    color: var(--yellow-3);
+    color: var(--accent-color-3, --yellow-3);
   }
 
   @keyframes appear {

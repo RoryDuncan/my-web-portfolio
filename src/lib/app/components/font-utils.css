@@ -4,6 +4,24 @@
   font-style: normal;
 }
 
+.space-mono-regular {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.astloch-regular {
+  font-family: "Astloch", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.astloch-bold {
+  font-family: "Astloch", system-ui;
+  font-weight: 700;
+  font-style: normal;
+}
+
 
 .noto-sans-100 {
     font-family: "Noto Sans", sans-serif;
@@ -151,4 +169,8 @@
 
 .text-uppercase {
     text-transform: uppercase;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
 }
