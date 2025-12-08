@@ -7,13 +7,116 @@
 
   let charRefs: Record<string, HTMLElement | undefined> = $state({});
 
-  const nameChars = data.hero.name.split("");
+  const nameChars = $derived(data.hero.name.split(""));
+
+  let running = $state(true);
+  let rafId: number | null = null;
+  let lastRender = $state(0);
+  const delay = 5000;
+
+  function swapChars() {
+    const keys = Object.keys(charRefs);
+    if (keys.length > 1) {
+      const randomIndex1 = Math.floor(Math.random() * keys.length);
+      let randomIndex2;
+      do {
+        randomIndex2 = Math.floor(Math.random() * keys.length);
+      } while (randomIndex1 === randomIndex2);
+
+      const key1 = keys[randomIndex1];
+      const key2 = keys[randomIndex2];
+
+      const el1 = charRefs[key1];
+      const el2 = charRefs[key2];
+
+      if (el1 && el2) {
+        const [text1, text2] = [el1.innerText, el2.innerText];
+        el2.innerText = text1;
+        el2.dataset.char = text1;
+        el1.innerText = text2;
+        el1.dataset.char = text2;
+      }
+    }
+  }
+
+  function render(runTime: DOMHighResTimeStamp) {
+    const delta = runTime - lastRender;
+
+    if (delta > 100) {
+      swapChars();
+      lastRender = runTime;
+    }
+
+    if (running) {
+      rafId = window.requestAnimationFrame(render);
+    } else if (rafId !== null) {
+      window.cancelAnimationFrame(rafId);
+    }
+  }
+
+  function onMouseEnter(index: number, char: string) {
+    const gridWidth = 16;
+    const col = index % gridWidth;
+    const row = Math.floor(index / gridWidth);
+    const totalChars = Object.keys(charRefs).length;
+
+    const elementsToHighlight = new Set<HTMLElement>();
+
+    // Get column elements
+    for (let i = col; i < totalChars; i += gridWidth) {
+      const el = charRefs[`${i}`];
+      if (el) {
+        elementsToHighlight.add(el);
+      }
+    }
+
+    // Get row elements
+    const rowStart = row * gridWidth;
+    for (let i = rowStart; i < rowStart + gridWidth; i++) {
+      const el = charRefs[`${i}`];
+      if (el) {
+        elementsToHighlight.add(el);
+      }
+    }
+
+    // Example of what you can do with the elements:
+    elementsToHighlight.forEach((el) => {
+      window.requestAnimationFrame(() => {
+        el.innerText = data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
+        el.style.opacity = "0.5";
+      });
+      // You can change their style, text, etc.
+      // For example, let's change their text to a random character
+      //   el.innerText = String.fromCharCode(100 + Math.floor(Math.random() * 26));
+      //   el.innerText = data.hero.randomChar();
+    });
+  }
+
+  function onMouseLeave(index: number) {
+    Object.values(charRefs).forEach((el) => {
+      if (el instanceof HTMLElement) {
+        el.innerText = el.dataset.char ?? "/";
+        el.style.opacity = "0.1";
+      }
+    });
+  }
+
+  $effect(() => {
+    window.setTimeout(() => {
+      lastRender = performance.now();
+      window.requestAnimationFrame(render);
+    }, delay);
+  });
 </script>
 
 {#snippet render_char(parts: string[], indexStart: number)}
   {#each parts as char, i}
     {@const roll = Math.random()}
     <i
+      role="region"
+      data-char={char}
+      onmouseenter={() => onMouseEnter(indexStart + i, char)}
+      onmouseleave={() => onMouseLeave(indexStart + i)}
       bind:this={charRefs[`${indexStart + i}`]}
       class="char"
       class:accent-1={roll >= 0.7}
@@ -90,7 +193,7 @@
   .char-set .char {
     opacity: 0;
     font-size: 2.5vw;
-    animation: 2s appear ease-in 2s;
+    animation: 4s appear ease-in 0s;
     animation-fill-mode: forwards;
     color: var(--choco-3);
   }
