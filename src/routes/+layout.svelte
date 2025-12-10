@@ -5,6 +5,7 @@
   import favicon from "$lib/assets/favicon.svg";
   import GoogleWebFonts from "$lib/app/components/GoogleWebFonts.svelte";
   import { page } from "$app/state";
+  import { createDebouncer } from "$lib/app/utils.js";
 
   let { children, data } = $props();
 
@@ -13,43 +14,48 @@
   const nameChars = $derived(data.hero.name.split(""));
   let elementsToHighlight: Set<HTMLElement> = $state(new Set());
 
+  const debouncer = createDebouncer(60);
+
   async function onMouseEnter(index: number, char: string) {
-    const gridWidth = 16;
-    const col = index % gridWidth;
-    const row = Math.floor(index / gridWidth);
-    const totalChars = Object.keys(charRefs).length;
+    debouncer.run(() => {
+      const gridWidth = 16;
+      const col = index % gridWidth;
+      const row = Math.floor(index / gridWidth);
+      const totalChars = Object.keys(charRefs).length;
 
-    elementsToHighlight = new Set();
+      elementsToHighlight = new Set();
 
-    // Get column elements
-    for (let i = col; i < totalChars; i += gridWidth) {
-      const el = charRefs[`${i}`];
-      if (el) {
-        elementsToHighlight.add(el);
+      // Get column elements
+      for (let i = col; i < totalChars; i += gridWidth) {
+        const el = charRefs[`${i}`];
+        if (el) {
+          elementsToHighlight.add(el);
+        }
       }
-    }
 
-    // Get row elements
-    const rowStart = row * gridWidth;
-    for (let i = rowStart; i < rowStart + gridWidth; i++) {
-      const el = charRefs[`${i}`];
-      if (el) {
-        elementsToHighlight.add(el);
+      // Get row elements
+      const rowStart = row * gridWidth;
+      for (let i = rowStart; i < rowStart + gridWidth; i++) {
+        const el = charRefs[`${i}`];
+        if (el) {
+          elementsToHighlight.add(el);
+        }
       }
-    }
 
-    // Example of what you can do with the elements:
-    elementsToHighlight.forEach((el) => {
-      el.innerText = char; //data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
-      // el.style.opacity = "0.5";
-      // You can change their style, text, etc.
-      // For example, let's change their text to a random character
-      //   el.innerText = String.fromCharCode(100 + Math.floor(Math.random() * 26));
-      //   el.innerText = data.hero.randomChar();
+      // Example of what you can do with the elements:
+      elementsToHighlight.forEach((el) => {
+        el.innerText = char; //data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
+        // el.style.opacity = "0.5";
+        // You can change their style, text, etc.
+        // For example, let's change their text to a random character
+        //   el.innerText = String.fromCharCode(100 + Math.floor(Math.random() * 26));
+        //   el.innerText = data.hero.randomChar();
+      });
     });
   }
 
   function onMouseLeave() {
+    debouncer.cancel();
     Object.values(charRefs).forEach((el) => {
       if (el instanceof HTMLElement) {
         el.innerText = el.dataset.char ?? "/";
@@ -65,7 +71,7 @@
   <link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="content">
+<div class="layout">
   {#snippet render_char(parts: string[], indexStart: number)}
     {#each parts as char, i}
       {@const roll = Math.random()}
@@ -116,7 +122,7 @@
 </div>
 
 <style>
-  .content {
+  .layout {
     padding: 0rem;
   }
 
@@ -198,6 +204,27 @@
 
     to {
       opacity: 1;
+    }
+  }
+
+  @media screen and (min-width: 72rem) {
+    .layout {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+    }
+
+    .character-grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .char,
+    .char-set .char {
+      font-size: 1rem;
+    }
+
+    .page-content {
+      border-left: 1px solid var(--gray-10);
+      border-top: none;
     }
   }
 </style>
