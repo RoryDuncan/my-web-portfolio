@@ -1,25 +1,55 @@
 :root {
-    --brand: var(--teal-8);
-    --link: var(--teal-5);
-    --accent-color-1: var(--pink-7);
-    --accent-color-2: var(--text-3);
-    --accent-color-3: var(--yellow-4);
+  --brand: var(--teal-8);
+  --link: var(--teal-5);
+  --accent-color-1: var(--pink-7);
+  --accent-color-2: var(--text-3);
+  --accent-color-3: var(--yellow-4);
 }
 
-html, body {
-    font-family: "Work Sans", var(--font-system-ui);
+html,
+body {
+  font-family: "Work Sans", var(--font-system-ui);
 }
 
-h1,h2,h3,h4,h5,h6 {
-    font-weight: 400;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --brand: var(--choco-4);
-        --link: var(--teal-5);
-        --accent-color-1: var(--pink-3);
-        --accent-color-2: var(--text-1);
-        --accent-color-3: var(--yellow-3);
-    }
+  :root {
+    --brand: var(--choco-4);
+    --link: var(--teal-5);
+    --accent-color-1: var(--pink-3);
+    --accent-color-2: var(--text-1);
+    --accent-color-3: var(--yellow-3);
+  }
+}
+
+.visually-hidden {
+  display: none;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mt-auto {
+  margin-top: auto !important;
 }

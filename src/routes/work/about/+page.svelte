@@ -1,1 +1,53 @@
-<h1>hello?</h1>
+<script lang="ts">
+  import PageTitle from "$lib/app/components/PageTitle.svelte";
+  import type { PageData, RouteId } from "./$types";
+
+  interface Props {
+    data: PageData;
+    asSubView?: boolean;
+  }
+  let { data, asSubView = false }: Props = $props();
+</script>
+
+<PageTitle routeId={"/work/about" satisfies RouteId}>My Roles</PageTitle>
+
+<p class="mb-2">
+  I've worked in software engineering for about {new Date().getFullYear() - 2012} years.
+</p>
+
+<p>Some highlights:</p>
+<ul class="mt-1 unstyled">
+  <li>
+    Front-end architect <br />—setting up cross-project tooling, patterns, design systems, and
+    layered architectures
+  </li>
+  <li>
+    "react expert"<br />—Coming into projects late to cleanup the messes of undisplined teams
+  </li>
+  <li>
+    Team Lead<br />—organizing projects, dependencies, people, and technology
+  </li>
+  <li>
+    The generic senior software engineer<br />—implementing things across "the stack" with muddying
+    levels of responsibilities
+  </li>
+  <li>Director-level<br />—handling start-up needs by wearing every hat</li>
+  <li>Client-support<br />—Handling content and UI changes at the whim of clients</li>
+</ul>
+
+<!-- <p>
+  I've been loving training teams to adopt <a href="https://svelte.dev" target="_blank">svelte</a> for
+  building best-in-class production software.
+</p> -->
+
+<style>
+  .unstyled {
+    margin-left: 0;
+    padding-left: 1em;
+    list-style-type: circle;
+  }
+
+  .unstyled li {
+    margin-bottom: 0.75rem;
+  }
+</style>
