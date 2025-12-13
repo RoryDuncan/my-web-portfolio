@@ -6,6 +6,9 @@
   import GoogleWebFonts from "$lib/app/components/GoogleWebFonts.svelte";
   import { page } from "$app/state";
   import { createDebouncer } from "$lib/app/utils.js";
+  import { fly } from "svelte/transition";
+  import { circInOut } from "svelte/easing";
+  import { replaceState } from "$app/navigation";
 
   let { children, data } = $props();
 
@@ -15,6 +18,7 @@
   let elementsToHighlight: Set<HTMLElement> = $state(new Set());
 
   const debouncer = createDebouncer(60);
+  const startingPage = page.route.id;
 
   async function onMouseEnter(index: number, char: string) {
     debouncer.run(() => {
@@ -95,10 +99,7 @@
   <div class="character-grid space-mono-regular" role="region" onmouseleave={onMouseLeave}>
     {@render render_char(data.hero.part1, 0)}
 
-    <svelte:element
-      this={page.url.pathname === "/" ? "h1" : "h5"}
-      class="char-set share-tech-mono-regular text-lowercase"
-    >
+    <div class="char-set share-tech-mono-regular text-lowercase">
       {#each nameChars as char, i}
         <code
           role="region"
@@ -106,7 +107,7 @@
           onmouseenter={() => onMouseEnter(data.hero.part1.length + i, char)}>{char}</code
         >
       {/each}
-    </svelte:element>
+    </div>
 
     {@render render_char(data.hero.part2, data.hero.part1.length + data.hero.name.length)}
   </div>
@@ -117,7 +118,71 @@
         <a href="/">back</a>
       {/if}
     </div>
-    {@render children()}
+    <div class="d-flex-column">
+      <div class="mb-2">
+        {@render children()}
+      </div>
+
+      {#if page.state.subview === undefined}
+        <div class="view mt-auto" out:fly={{ x: 100, duration: 200 }}>
+          <h5>Socials</h5>
+          <div class="links">
+            <a href="https://github.com/RoryDuncan" target="_blank" rel="noopener noreferrer"
+              >github</a
+            >
+            <a
+              href="https://www.linkedin.com/in/rory-duncan-53288b79/"
+              target="_blank"
+              rel="noopener noreferrer">linkedin</a
+            >
+            <a
+              href="https://letterboxd.com/rorymeowcoffee/"
+              target="_blank"
+              rel="noopener noreferrer">letterboxd</a
+            >
+            <a
+              href="https://www.instagram.com/rory.meow.coffee/"
+              target="_blank"
+              rel="noopener noreferrer">instagram</a
+            >
+          </div>
+        </div>
+      {:else}
+        <div
+          class="inline-page view"
+          in:fly={{ y: 200, easing: circInOut }}
+          out:fly={{ x: 100, duration: 300 }}
+        >
+          {#if page.state.subview === "/personal/about"}
+            {#await import(`./personal/about/+page.svelte`)}
+              <span role="none" class="dinkus">∙∙∙</span>
+            {:then { default: SubViewComponent }}
+              <SubViewComponent {data} asSubView={true} />
+            {/await}
+          {:else if page.state.subview === "/work/about"}
+            {#await import(`./work/about/+page.svelte`)}
+              <span role="none" class="dinkus">∙∙∙</span>
+            {:then { default: SubViewComponent }}
+              <SubViewComponent {data} asSubView={true} />
+            {/await}
+          {/if}
+        </div>
+        <div class="page-actions view">
+          {#if page.route.id !== null && page.route.id !== page.state.subview}
+            <button
+              class="close"
+              onclick={() =>
+                replaceState(page.route.id ?? "/", {
+                  subview: undefined,
+                })}
+              >close
+            </button>
+
+            <a href={page.state.subview}>open</a>
+          {/if}
+        </div>
+      {/if}
+    </div>
   </div>
 </div>
 
@@ -197,6 +262,24 @@
     color: var(--accent-color-3, --yellow-3);
   }
 
+  .d-flex-column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .view {
+    padding: 1rem 2rem;
+    margin: 0rem -2rem 0 -2rem;
+
+    border-top: 1px solid var(--gray-10);
+  }
+
+  .inline-page {
+    margin-top: 2rem;
+    flex-grow: 1;
+  }
+
   @keyframes appear {
     from {
       opacity: 0;
@@ -226,5 +309,33 @@
       border-left: 1px solid var(--gray-10);
       border-top: none;
     }
+  }
+
+  :global(.sep) {
+    background-color: var(--gray-10);
+    height: 1px;
+    margin-block: var(--size-fluid-3);
+  }
+
+  .page-actions {
+    padding: 0.5rem 1rem;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-evenly;
+    position: sticky;
+    bottom: 0px;
+    background: var(--surface-1);
+  }
+
+  .close {
+    all: unset;
+    color: var(--link-visited);
+    cursor: pointer;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 </style>
