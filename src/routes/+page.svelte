@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { fly, slide } from "svelte/transition";
   import type { PageData, RouteId } from "./$types";
-  import { circInOut, quadInOut } from "svelte/easing";
   import { pushState } from "$app/navigation";
-  import { page } from "$app/state";
   import PageTitle from "$lib/app/components/PageTitle.svelte";
   interface Props {
     data: PageData;
@@ -41,7 +38,7 @@
 
     <p>
       <span role="none" class="dinkus">∙∙∙</span>
-      Also,
+      If curious,
       <a
         href="/personal/about"
         onclick={(e) => {
@@ -49,7 +46,7 @@
           pushState("/personal/about", {
             subview: "/personal/about",
           });
-        }}>I'm seldom bored</a
+        }}>learn about me</a
       >.
     </p>
   </div>

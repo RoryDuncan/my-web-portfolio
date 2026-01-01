@@ -84,8 +84,6 @@
         role="region"
         data-char={char}
         class:dimmed={true}
-        onmouseenter={() => onMouseEnter(index, char)}
-        onmouseleave={onMouseLeave}
         bind:this={charRefs[`${index}`]}
         class:highlighted={elementsToHighlight.has(charRefs[index]!)}
         class="char"
@@ -96,7 +94,7 @@
     {/each}
   {/snippet}
 
-  <div class="character-grid space-mono-regular" role="region" onmouseleave={onMouseLeave}>
+  <div class="character-grid space-mono-regular" role="region">
     {@render render_char(data.hero.part1, 0)}
 
     <div class="char-set share-tech-mono-regular text-lowercase">
@@ -123,31 +121,7 @@
         {@render children()}
       </div>
 
-      {#if page.state.subview === undefined}
-        <div class="view mt-auto" out:fly={{ x: 100, duration: 200 }}>
-          <h5>Socials</h5>
-          <div class="links">
-            <a href="https://github.com/RoryDuncan" target="_blank" rel="noopener noreferrer"
-              >github</a
-            >
-            <a
-              href="https://www.linkedin.com/in/rory-duncan-53288b79/"
-              target="_blank"
-              rel="noopener noreferrer">linkedin</a
-            >
-            <a
-              href="https://letterboxd.com/rorymeowcoffee/"
-              target="_blank"
-              rel="noopener noreferrer">letterboxd</a
-            >
-            <a
-              href="https://www.instagram.com/rory.meow.coffee/"
-              target="_blank"
-              rel="noopener noreferrer">instagram</a
-            >
-          </div>
-        </div>
-      {:else}
+      {#if page.state.subview !== undefined}
         <div
           class="inline-page view"
           in:fly={{ y: 200, easing: circInOut }}
@@ -182,6 +156,27 @@
           {/if}
         </div>
       {/if}
+      <div class="view mt-auto">
+        <h5>Socials</h5>
+        <div class="links">
+          <a href="https://github.com/RoryDuncan" target="_blank" rel="noopener noreferrer"
+            >github</a
+          >
+          <a
+            href="https://www.linkedin.com/in/rory-duncan-53288b79/"
+            target="_blank"
+            rel="noopener noreferrer">linkedin</a
+          >
+          <a href="https://letterboxd.com/rorymeowcoffee/" target="_blank" rel="noopener noreferrer"
+            >letterboxd</a
+          >
+          <a
+            href="https://www.instagram.com/rory.meow.coffee/"
+            target="_blank"
+            rel="noopener noreferrer">instagram</a
+          >
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -199,7 +194,7 @@
     overflow: hidden;
     display: grid;
     font-size: 1rem;
-    grid-template-columns: repeat(16, 1fr);
+    grid-template-columns: repeat(16, calc(100vw / 15));
     gap: 2px;
     align-items: center;
     background: var(--slate-11);
