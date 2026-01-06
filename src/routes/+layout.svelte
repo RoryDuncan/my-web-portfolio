@@ -9,6 +9,7 @@
   import { fly } from "svelte/transition";
   import { circInOut } from "svelte/easing";
   import { replaceState } from "$app/navigation";
+  import { dev } from "$app/environment";
 
   let { children, data } = $props();
 
@@ -18,53 +19,17 @@
   let elementsToHighlight: Set<HTMLElement> = $state(new Set());
 
   const debouncer = createDebouncer(60);
-  const startingPage = page.route.id;
 
-  async function onMouseEnter(index: number, char: string) {
-    debouncer.run(() => {
-      const gridWidth = 16;
-      const col = index % gridWidth;
-      const row = Math.floor(index / gridWidth);
-      const totalChars = Object.keys(charRefs).length;
+  let characterGridRef = $state<HTMLElement>(null!);
+  function onCharacterGridMove(event: MouseEvent) {
+    if (characterGridRef instanceof HTMLElement) {
+      const rect = characterGridRef.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
 
-      elementsToHighlight = new Set();
-
-      // Get column elements
-      for (let i = col; i < totalChars; i += gridWidth) {
-        const el = charRefs[`${i}`];
-        if (el) {
-          elementsToHighlight.add(el);
-        }
-      }
-
-      // Get row elements
-      const rowStart = row * gridWidth;
-      for (let i = rowStart; i < rowStart + gridWidth; i++) {
-        const el = charRefs[`${i}`];
-        if (el) {
-          elementsToHighlight.add(el);
-        }
-      }
-
-      // Example of what you can do with the elements:
-      elementsToHighlight.forEach((el) => {
-        el.innerText = char; //data.hero.realm[Math.floor(Math.random() * data.hero.realm.length)];
-        // el.style.opacity = "0.5";
-        // You can change their style, text, etc.
-        // For example, let's change their text to a random character
-        //   el.innerText = String.fromCharCode(100 + Math.floor(Math.random() * 26));
-        //   el.innerText = data.hero.randomChar();
-      });
-    });
-  }
-
-  function onMouseLeave() {
-    debouncer.cancel();
-    Object.values(charRefs).forEach((el) => {
-      if (el instanceof HTMLElement) {
-        el.innerText = el.dataset.char ?? "/";
-      }
-    });
+      characterGridRef.style.setProperty("--x", `${(x / rect.width) * 100}%`);
+      characterGridRef.style.setProperty("--y", `${(y / rect.height) * 100}%`);
+    }
   }
 </script>
 
@@ -72,7 +37,9 @@
 
 <svelte:head>
   <title>meow.coffee</title>
-  <link rel="icon" href={favicon} />
+  {#if !dev}
+    <script src="https://app.rybbit.io/api/script.js" data-site-id="718785d324aa" defer></script>
+  {/if}
 </svelte:head>
 
 <div class="layout">
@@ -83,7 +50,7 @@
       <code
         role="region"
         data-char={char}
-        class:dimmed={true}
+        class:dimmed={false}
         bind:this={charRefs[`${index}`]}
         class:highlighted={elementsToHighlight.has(charRefs[index]!)}
         class="char"
@@ -94,26 +61,31 @@
     {/each}
   {/snippet}
 
-  <div class="character-grid space-mono-regular" role="region">
-    {@render render_char(data.hero.part1, 0)}
-
-    <div class="char-set share-tech-mono-regular text-lowercase">
-      {#each nameChars as char, i}
-        <code
-          role="region"
-          class="char"
-          onmouseenter={() => onMouseEnter(data.hero.part1.length + i, char)}>{char}</code
-        >
-      {/each}
-    </div>
-
-    {@render render_char(data.hero.part2, data.hero.part1.length + data.hero.name.length)}
+  <div
+    class="character-grid space-mono-regular"
+    bind:this={characterGridRef}
+    onmousemove={onCharacterGridMove}
+    role="region"
+  >
+    {@render render_char(data.hero.realm, 0)}
   </div>
 
   <div class="page-content" data-sveltekit-noscroll>
-    <div class="back">
+    <div class="breadcrumbs">
+      <a class="breadcrumb" href="/" title="home">
+        <img
+          class:mode-inverted={true}
+          loading="eager"
+          fetchpriority="high"
+          src="/images/favicon-96x96.png"
+          alt="home"
+          style:height="2rem"
+        />
+      </a>
       {#if page.url.pathname != "/"}
-        <a href="/">back</a>
+        {#if page.route.id === "/blog/[slug]"}
+          <a class="breadcrumb" href="/blog">blog</a>
+        {/if}
       {/if}
     </div>
     <div class="d-flex-column">
@@ -122,42 +94,48 @@
       </div>
 
       {#if page.state.subview !== undefined}
-        <div
-          class="inline-page view"
-          in:fly={{ y: 200, easing: circInOut }}
-          out:fly={{ x: 100, duration: 300 }}
-        >
+        <div class="inline-page view" in:fly={{ y: 200, easing: circInOut }}>
           {#if page.state.subview === "/personal/about"}
             {#await import(`./personal/about/+page.svelte`)}
               <span role="none" class="dinkus">∙∙∙</span>
             {:then { default: SubViewComponent }}
-              <SubViewComponent {data} asSubView={true} />
+              <SubViewComponent {data} />
             {/await}
           {:else if page.state.subview === "/work/about"}
             {#await import(`./work/about/+page.svelte`)}
               <span role="none" class="dinkus">∙∙∙</span>
             {:then { default: SubViewComponent }}
-              <SubViewComponent {data} asSubView={true} />
+              <SubViewComponent {data} />
+            {/await}
+          {:else if page.state.subview === "/blog"}
+            {#await import(`./blog/+page.svelte`)}
+              <span role="none" class="dinkus">∙∙∙</span>
+            {:then { default: SubViewComponent }}
+              <SubViewComponent {data} />
             {/await}
           {/if}
         </div>
         <div class="page-actions view">
           {#if page.route.id !== null && page.route.id !== page.state.subview}
             <button
-              class="close"
+              class="action close"
               onclick={() =>
                 replaceState(page.route.id ?? "/", {
                   subview: undefined,
                 })}
-              >close
+              title="Close panel"
+            >
+              <img src="/icons/top_panel_close.svg" alt="close panel" />
             </button>
 
-            <a href={page.state.subview}>open</a>
+            <a href={page.state.subview} class="action" title="open panel as full page">
+              <img src="/icons/arrow_outward.svg" alt="open panel as full page" />
+            </a>
           {/if}
         </div>
       {/if}
       <div class="view mt-auto">
-        <h5>Socials</h5>
+        <h5 class="visually-hidden">Socials</h5>
         <div class="links">
           <a href="https://github.com/RoryDuncan" target="_blank" rel="noopener noreferrer"
             >github</a
@@ -190,24 +168,52 @@
     position: sticky;
     top: 0;
     bottom: 0;
-    height: 100vh;
+    height: calc(100vh - 6rem);
     overflow: hidden;
     display: grid;
     font-size: 1rem;
     grid-template-columns: repeat(16, calc(100vw / 15));
     gap: 2px;
     align-items: center;
-    background: var(--slate-11);
+  }
+  .character-grid {
+    --x: 50%;
+    --y: 50%;
+    --radius: 12rem;
+    --color: var(--gray-2);
+
+    background: radial-gradient(
+      circle var(--radius) at var(--x) var(--y),
+      var(--color),
+      transparent
+    );
   }
 
-  .back {
-    min-height: 2rem;
+  @media (prefers-color-scheme: dark) {
+    .character-grid {
+      --color: var(--gray-10);
+    }
+  }
+
+  .breadcrumbs {
+    padding: 0.75rem 1rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid var(--surface-border-color);
+    margin: -2rem -2rem 1rem -2rem;
+  }
+
+  .breadcrumbs .breadcrumb {
+    color: var(--brand);
   }
 
   .page-content {
     padding: 2rem;
     background-color: var(--surface-1);
-    border-top: 0.5rem solid var(--gray-10);
+    border-top: 1px solid var(--surface-border-color);
+    box-shadow: 0 -1rem 2rem -1rem rgba(0, 0, 0, 0.5);
     z-index: 2;
     position: relative;
     min-height: max(55vh, 10rem);
@@ -220,30 +226,12 @@
     place-content: center;
     transition: 0.2s ease-in-out transform;
     user-select: none;
-  }
-
-  .char-set {
-    display: contents;
-  }
-
-  .char-set .char {
-    font-size: max(4vw, 2rem);
-    animation: 1s appear ease-in 0s;
-    animation-fill-mode: forwards;
-    color: var(--brand);
+    background: var(--surface-1);
   }
 
   .char {
     color: var(--stone-2);
     transition: 0.5s ease-in-out opacity;
-  }
-
-  .dimmed {
-    opacity: 0.1;
-  }
-
-  .char.highlighted {
-    opacity: 0.5;
   }
 
   .accent-1 {
@@ -266,8 +254,7 @@
   .view {
     padding: 1rem 2rem;
     margin: 0rem -2rem 0 -2rem;
-
-    border-top: 1px solid var(--gray-10);
+    border-top: 1px solid var(--surface-border-color);
   }
 
   .inline-page {
@@ -288,21 +275,22 @@
   @media screen and (min-width: 72rem) {
     .layout {
       display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
     .character-grid {
+      height: 100vh;
       grid-template-columns: repeat(12, 1fr);
     }
 
-    .char,
-    .char-set .char {
+    .char {
       font-size: 1rem;
     }
 
     .page-content {
-      border-left: 1px solid var(--gray-10);
+      border-left: 1px solid var(--surface-border-color);
       border-top: none;
+      box-shadow: none;
     }
   }
 
@@ -322,6 +310,18 @@
     background: var(--surface-1);
   }
 
+  .page-actions .action {
+    padding: 0.5rem;
+    aspect-ratio: 1;
+    cursor: pointer;
+    background: var(--surface-1);
+    border-radius: 6px;
+  }
+
+  .page-actions .action:hover {
+    background: var(--surface-2);
+  }
+
   .close {
     all: unset;
     color: var(--link-visited);
@@ -332,5 +332,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .mode-inverted {
+      filter: invert(1);
+    }
   }
 </style>

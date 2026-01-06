@@ -1,10 +1,33 @@
 :root {
-  --brand: var(--teal-8);
-  --link: var(--teal-5);
+  --brand: var(--teal-9);
+  --link: var(--teal-9);
+  --link-visited: var(--teal-10);
   --accent-color-1: var(--pink-7);
   --accent-color-2: var(--text-3);
   --accent-color-3: var(--yellow-4);
+  --surface-border-color: var(--stone-4);
 }
+
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: var(--stone-6);
+    --link: var(--brand);
+    --link-visited: var(--stone-5);
+    --accent-color-1: var(--pink-3);
+    --accent-color-2: var(--text-1);
+    --accent-color-3: var(--yellow-3);
+    --surface-border-color: var(--gray-10);
+  }
+}
+
+a[href] {
+  text-decoration-color: var(--link-visited);
+  }
+
+
+
 
 html,
 body {
@@ -20,15 +43,6 @@ h6 {
   font-weight: 400;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --brand: var(--choco-4);
-    --link: var(--teal-5);
-    --accent-color-1: var(--pink-3);
-    --accent-color-2: var(--text-1);
-    --accent-color-3: var(--yellow-3);
-  }
-}
 
 .visually-hidden {
   display: none;
@@ -52,4 +66,8 @@ h6 {
 
 .mt-auto {
   margin-top: auto !important;
+}
+
+.page-title {
+  font-size: var(--font-size-6);
 }

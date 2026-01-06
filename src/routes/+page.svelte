@@ -5,11 +5,8 @@
   interface Props {
     data: PageData;
   }
-  let { data }: Props = $props();
 
-  //   const { Components } = data;
-
-  let displayContentFor: "work" | "personal" | "none" = $state("none");
+  const { data }: Props = $props();
 </script>
 
 <div class="d-flex">
@@ -18,8 +15,8 @@
 
     <PageTitle fontSize={"var(--font-size-3)"} routeId={"/" satisfies RouteId}>I'm rory</PageTitle>
 
+    <span role="none" class="dinkus">∙∙∙</span>
     <p>
-      <span role="none" class="dinkus">∙∙∙</span>
       I'm sometimes a
       <a
         href="/work/about"
@@ -32,13 +29,9 @@
       >.
     </p>
 
-    <p class="mt-1" style:color={"var(--gray-6)"}>
-      Lately, I assist teams to embrace better frontends for faster velocity.
-    </p>
-
+    <span role="none" class="dinkus">∙∙∙</span>
     <p>
-      <span role="none" class="dinkus">∙∙∙</span>
-      If curious,
+      If feeling personal,
       <a
         href="/personal/about"
         onclick={(e) => {
@@ -46,9 +39,22 @@
           pushState("/personal/about", {
             subview: "/personal/about",
           });
-        }}>learn about me</a
+        }}>read about me</a
       >.
     </p>
+    {#if data.hasPublishedArticles}
+      <p>
+        I have a <a
+          onclick={async (e) => {
+            e.preventDefault();
+            pushState("/blog", {
+              subview: "/blog",
+            });
+          }}
+          href="/blog">blog</a
+        >.
+      </p>
+    {/if}
   </div>
   <div class="pfp">
     <img loading="eager" src="/images/me.jpg" alt="Rory, smiling" />
@@ -59,7 +65,7 @@
   .dinkus {
     display: block;
     color: var(--gray-7);
-    margin: 0.5rem 0rem;
+    margin: 1rem 0rem;
     pointer-events: none;
     user-select: none;
   }
@@ -75,7 +81,7 @@
     width: 200px;
     aspect-ratio: 1 / 1;
     border-radius: 1rem;
-    border: 6px solid var(--gray-10);
+    border: 1px solid var(--surface-border-color);
     object-fit: cover;
     overflow: hidden;
     position: sticky;

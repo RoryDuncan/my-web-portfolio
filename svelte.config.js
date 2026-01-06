@@ -1,3 +1,4 @@
+import { mdsvex } from "mdsvex";
 import adapter from "@sveltejs/adapter-node";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
@@ -5,8 +6,13 @@ import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 const config = {
   // Consult https://svelte.dev/docs/kit/integrations
   // for more information about preprocessors
-  preprocess: vitePreprocess(),
+  preprocess: [vitePreprocess(), mdsvex({
+    // extensions: ["mdx"]
+
+  })],
+
   kit: { adapter: adapter() },
+  extensions: [".svelte", ".svx"],
 };
 
 export default config;

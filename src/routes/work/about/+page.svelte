@@ -4,9 +4,8 @@
 
   interface Props {
     data: PageData;
-    asSubView?: boolean;
   }
-  let { data, asSubView = false }: Props = $props();
+  let { data }: Props = $props();
 </script>
 
 <PageTitle routeId={"/work/about" satisfies RouteId}>My Roles</PageTitle>
