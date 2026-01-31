@@ -14,8 +14,7 @@
   I've worked in software engineering for about {new Date().getFullYear() - 2012} years.
 </p>
 <p class="mb-2">
-  Before software engineering I would do ratty graphic design for bands and weird brands on myspace
-  and the wider internet.
+  Before software engineering I would do ratty graphic design for bands and weird brands.
 </p>
 
 <p class="mb-2">
@@ -26,8 +25,8 @@
 <p>Some role highlights:</p>
 <ul class="mt-1 mb-2 unstyled">
   <li>
-    Front-end architect <br />—setting up cross-project tooling, patterns, design systems, and
-    layered architectures
+    Front-end software architect <br />—setting up cross-project tooling, patterns, design systems,
+    and layered architectures
   </li>
   <li>
     "react expert"<br />—Coming into projects late to cleanup the messes of undisplined teams

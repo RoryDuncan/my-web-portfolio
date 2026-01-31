@@ -12,11 +12,7 @@
 
 <p class="mb-2">
   I have lived a few places on the west coast. I currently live in Northern California; a short walk
-  from a beautiful park. A detail which is important to me.
-</p>
-<p>
-  Ultimately, I'm probably a partial sum of my interests—that or you can extrapolate from them—so I
-  have listed them below.
+  from a beautiful park.
 </p>
 
 <ul class="mb-2">
